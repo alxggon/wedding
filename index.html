@@ -57,6 +57,12 @@
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
   }
+  /* Mobile browsers render background-attachment:fixed unreliably (the
+     dynamic address bar resizes the viewport, which can make a fixed
+     background appear stretched/zoomed). Fall back to normal scroll. */
+  @media (max-width: 760px){
+    body{ background-attachment: scroll; }
+  }
 
   /* subtle grain overlay */
   body::before{
