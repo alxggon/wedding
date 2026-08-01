@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Anna &amp; Alex — We're Getting Married</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Jost:wght@300;400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     EDITING GUIDE
+     - Facts that don't change by language (names, dates, address,
+       hotel names, links, the Web3Forms key) live in the SHARED
+       object near the top of the <script> at the bottom of this
+       file. Wording that differs by language (headings, labels,
+       schedule, FAQ, etc.) lives in the I18N object right after
+       it, with one block each for en / pt / ru. Edit values there
+       — the page updates itself.
+     - The language switcher (EN/PT/RU) is in the nav. It defaults
+       to English on load; add more languages by copying an I18N
+       block and adding a button in .lang-switch.
+     - The hero has a looping background video slot — search for
+       "VIDEO PLACEHOLDER" below to add your own clip.
+     ============================================================ */
+
+  :root{
+    --bg: #F6F1E1;
+    --bg-deep: #14231A;
+    --paper: #FBF7EA;
+    --ink: #1B2A1E;
+    --ink-soft: #4C5D48;
+    --brick: #2E5C3E;
+    --brick-deep: #1C3D28;
+    --sage: #7A9467;
+    --sage-deep: #3E5C33;
+    --gold: #C9A227;
+    --gold-soft: #E4C868;
+    --rose: #E2725B;
+    --dark-red: #7A1F1F;
+    --line: rgba(20,35,26,0.15);
+    --shadow: 0 10px 30px rgba(15,25,18,0.18);
+    --on-dark: #EFE9D4;
+    --on-dark-soft: #C7D6BE;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg) url("website_background.png") center / cover no-repeat fixed;
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* subtle grain overlay */
+  body::before{
+    content:"";
+    position: fixed;
+    inset:0;
+    pointer-events:none;
+    z-index: 999;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* soft cream veil over the background photo, keeps text legible */
+  body::after{
+    content:"";
+    position: fixed;
+    inset:0;
+    pointer-events:none;
+    z-index: 0;
+    background: rgba(246,241,225,0.65);
+  }
+  .wrap, section, nav, footer, .divider{ position: relative; z-index: 1; }
+
+  h1,h2,h3{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    margin: 0 0 0.4em 0;
+    color: var(--ink);
+  }
+
+  .script{
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+  }
+
+  a{ color: inherit; }
+
+  .wrap{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  section{
+    padding: 5rem 0;
+    position: relative;
+  }
+
+  .eyebrow{
+    font-family: 'Jost', sans-serif;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    color: var(--dark-red);
+    font-weight: 600;
+    margin-bottom: 0.9rem;
+    display:block;
+  }
+
+  .section-head{
+    text-align:center;
+    max-width: 620px;
+    margin: 0 auto 3rem auto;
+  }
+  .section-head h2{ font-size: clamp(1.9rem, 4vw, 2.7rem); }
+  .section-head p{ color: var(--ink-soft); font-size: 1.02rem; }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position: sticky;
+    top:0;
+    z-index: 100;
+    background: rgba(246,241,225,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0.9rem 1.5rem;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+  }
+  .nav-mono{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.15rem;
+    letter-spacing: 0.03em;
+  }
+  .nav-right{
+    display:flex;
+    align-items:center;
+    gap: 1.2rem;
+  }
+  .lang-switch{
+    display:flex;
+    gap: 0.35rem;
+  }
+  .lang-btn{
+    background:none;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    line-height: 1;
+    padding: 0.32rem;
+    width: 32px; height: 32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius: 50%;
+    cursor:pointer;
+    transition: 0.2s;
+  }
+  .lang-btn:hover{ border-color: var(--brick); }
+  .lang-btn.active{ border-color: var(--brick); border-width: 2px; background: none; }
+  .nav-links{
+    position: fixed;
+    top: 58px; right: 1.5rem;
+    width: 210px;
+    display:flex;
+    flex-direction: column;
+    background: rgba(251,247,234,0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 1rem 1.4rem;
+    gap: 0.9rem;
+    list-style:none;
+    margin:0;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+    transform: translateY(-20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+  .nav-links.open{ transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .nav-links a{
+    text-decoration:none;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    transition: color 0.2s;
+    padding-bottom: 3px;
+    border-bottom: 1px solid transparent;
+  }
+  .nav-links a:hover{ color: var(--brick); border-color: var(--brick); }
+  .nav-toggle{
+    display:block;
+    background:none;
+    border:none;
+    cursor:pointer;
+    width: 30px; height: 22px;
+    position: relative;
+  }
+  .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after{
+    content:"";
+    position:absolute;
+    left:0; right:0;
+    height:2px;
+    background: var(--ink);
+    transition: 0.25s;
+  }
+  .nav-toggle span{ top:10px; }
+  .nav-toggle span::before{ top:-8px; }
+  .nav-toggle span::after{ top:8px; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: 4.8rem 0 5.4rem 0;
+    text-align:center;
+    background: var(--bg-deep);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-video{
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    background: linear-gradient(160deg, #3E6B47 0%, #1B3320 60%, #0E1A12 100%);
+  }
+  .hero-video video{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-video video{ display: none; }
+  }
+
+  .hero-names, .hero-amp, .hero-tagline, .hero-meta, .countdown .num, .countdown .lbl{
+    text-shadow: 0 1px 2px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.9), 0 6px 26px rgba(0,0,0,0.75);
+  }
+  .hero-names{
+    font-size: clamp(2.6rem, 8vw, 4.6rem);
+    line-height: 1;
+    margin: 0 0 0.6rem 0;
+    color: var(--on-dark);
+  }
+  .hero-amp{
+    font-family:'Caveat', cursive;
+    color: var(--gold-soft);
+    font-size: 0.7em;
+    padding: 0 0.15em;
+  }
+  .hero-tagline{
+    font-family:'Caveat', cursive;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: var(--gold-soft);
+    margin-bottom: 1.8rem;
+  }
+  .hero-meta{
+    color: var(--on-dark-soft);
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+  }
+  .hero-meta .dot{ margin: 0 0.6em; color: var(--gold); }
+
+  .countdown{
+    display:flex;
+    justify-content:center;
+    gap: 1.4rem;
+    margin-top: 2.2rem;
+    flex-wrap: wrap;
+  }
+  .countdown div{
+    min-width: 76px;
+  }
+  .countdown .num{
+    font-family:'Fraunces',serif;
+    font-size: 2rem;
+    font-weight:600;
+    color: var(--gold-soft);
+  }
+  .countdown .lbl{
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--on-dark-soft);
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider{
+    display:flex;
+    justify-content:center;
+    padding: 0 0 0.5rem 0;
+  }
+  .divider-img{ width: 372px; height: auto; opacity: 0.6; }
+
+  /* ---------- WELCOME NOTE ---------- */
+  .welcome{
+    text-align:center;
+    max-width: 640px;
+    margin: 0 auto;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+  .welcome .script{ font-size: 2rem; color: var(--brick); display:block; margin-bottom: 0.8rem; }
+  .welcome p{ color: var(--ink-soft); font-size: 1.05rem; }
+
+  /* ---------- SCHEDULE ---------- */
+  .timeline{
+    position: relative;
+    max-width: 620px;
+    margin: 0 auto;
+    padding-left: 2.2rem;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left: 7px; top: 6px; bottom: 6px;
+    width: 1px;
+    background: repeating-linear-gradient(to bottom, var(--gold) 0 6px, transparent 6px 11px);
+  }
+  .t-item{
+    position: relative;
+    padding-bottom: 2.4rem;
+  }
+  .t-item:last-child{ padding-bottom: 0; }
+  .t-item::before{
+    content: attr(data-n);
+    position:absolute;
+    left: -2.2rem;
+    top: 2px;
+    width: 15px; height:15px;
+    background: var(--paper);
+    border: 2px solid var(--brick);
+    border-radius: 50%;
+    font-size: 0;
+  }
+  /* Schedule & Travel timelines use icon badges instead of plain dots */
+  #timeline, #travelTimeline{ padding-left: 0; }
+  #timeline::before, #travelTimeline::before{ left: 21px; }
+  #timeline .t-item, #travelTimeline .t-item{
+    display:flex;
+    align-items:flex-start;
+    gap: 1.1rem;
+  }
+  #timeline .t-item::before, #travelTimeline .t-item::before{ content: none; }
+  #timeline .t-icon, #travelTimeline .t-icon{
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--brick);
+    color: var(--brick);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow: var(--shadow);
+    position: relative;
+    z-index: 1;
+  }
+  #timeline .t-icon svg, #travelTimeline .t-icon svg{ width: 20px; height: 20px; }
+  #timeline .t-content, #travelTimeline .t-content{ flex: 1; padding-top: 0.4rem; }
+  .t-time{
+    font-family:'Fraunces',serif;
+    font-weight: 600;
+    color: var(--brick-deep);
+    font-size: 1.05rem;
+    display:block;
+    margin-bottom: 0.2rem;
+  }
+  .t-title{ font-weight: 500; margin-bottom: 0.2rem; }
+  .t-desc{ color: var(--ink-soft); font-size: 0.95rem; }
+
+  /* ---------- CARD (generic) ---------- */
+  .card{
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.8rem;
+    box-shadow: var(--shadow);
+  }
+
+  /* ---------- PADRINHOS ---------- */
+  .padrinhos-bg{ background: var(--bg-deep); }
+  .padrinhos-bg h2, .padrinhos-bg h3{ color: var(--on-dark); }
+  .padrinhos-bg .eyebrow{ color: var(--gold-soft); }
+  .padrinhos-bg .section-head p{ color: var(--on-dark-soft); }
+  .padrinhos-bg .wp-list li{ color: var(--gold-soft); }
+  .padrinhos-bg .attire-block p{ color: var(--on-dark-soft); }
+  .padrinhos-bg .attire-title{ color: var(--gold-soft) !important; }
+  .padrinhos-bg .closing-note{ color: var(--gold-soft); }
+
+  .wp-columns{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  @media (max-width: 600px){ .wp-columns{ grid-template-columns: 1fr; gap: 2rem; } }
+  .wp-col h3{
+    font-size: 1.1rem;
+    margin-bottom: 0.1rem;
+    font-family:'Fraunces',serif;
+  }
+  .wp-list{ list-style:none; margin:0; padding:0; }
+  .wp-list li{
+    font-size: 1.1rem;
+    padding: 0.15rem 0;
+  }
+
+  .role-card{
+    max-width: 620px;
+    margin: 0 auto;
+  }
+  .role-card h3{
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--sage-deep) !important;
+    margin-bottom: 0.8rem;
+  }
+  .role-list{ list-style:none; margin:0; padding:0; }
+  .role-list li{
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+  .role-list li:last-child{ border-bottom:none; }
+  .role-list strong{ color: var(--ink); font-weight: 600; }
+
+  .attire-block{
+    max-width: 560px;
+    margin: 3rem auto 0 auto;
+    text-align: center;
+  }
+  .attire-block h3{
+    font-size: 0.85rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    margin-bottom: 0.6rem;
+  }
+  .attire-title{
+    font-family:'Fraunces',serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0 0 0.6rem 0;
+  }
+
+  .closing-note{
+    text-align:center;
+    max-width: 560px;
+    margin: 3rem auto 0 auto;
+    font-size: 1.5rem;
+  }
+
+  /* ---------- DRESS CODE ---------- */
+  .dressdo{
+    display:flex;
+    flex-direction: column;
+    gap: 3rem;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .dressdo h3{ font-size: 1.1rem; letter-spacing:0.02em; margin-bottom: 0.8rem; font-family:'Fraunces',serif; }
+  .dressdo .for-him h3{ color: var(--sage-deep); }
+  .dressdo .for-her h3{ color: var(--brick); }
+  .dressdo img{
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.1rem;
+  }
+  .dressdo .options-label{
+    display:block;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.7rem;
+  }
+  .dressdo ul{ margin:0; padding-left: 1.1rem; color: var(--ink-soft); font-size:0.95rem; }
+  .dressdo li{ margin-bottom: 0.4rem; }
+
+  /* ---------- HOTELS ---------- */
+  .hotel-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px,1fr));
+    gap: 1.4rem;
+  }
+  .hotel-card{ text-align:center; }
+  .venue-ref{ text-align:center; max-width: 480px; margin: 0 auto; }
+  .hotel-card h3{ font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .hotel-card p{ color: var(--ink-soft); font-size: 0.9rem; }
+  .btn{
+    display:inline-block;
+    margin-top: 0.9rem;
+    padding: 0.55rem 1.3rem;
+    background: var(--brick);
+    color: #fff;
+    text-decoration:none;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    transition: background 0.2s;
+  }
+  .btn:hover{ background: var(--brick-deep); }
+  .btn.alt{ background: var(--sage); }
+  .btn.alt:hover{ background: var(--sage-deep); }
+
+  /* ---------- REGISTRY ---------- */
+  .registry-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    gap: 1.4rem;
+  }
+  .registry-fun-note{
+    max-width: 560px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 2rem 1.8rem;
+    border: 2px dashed var(--gold);
+    border-radius: 14px;
+    background: var(--paper);
+  }
+  .registry-fun-title{
+    font-family:'Fraunces',serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--brick);
+    margin: 0 0 0.9rem 0;
+  }
+  .registry-fun-note p:not(.registry-fun-title){
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+    margin: 0;
+  }
+  .amazon-note{
+    max-width: 480px;
+    margin: 1.8rem auto 0 auto;
+    text-align: center;
+  }
+  .amazon-note p{
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+    margin: 0 0 1.1rem 0;
+  }
+  .registry-card{ text-align:center; }
+  .registry-card h3{ font-size: 1.05rem; }
+  .registry-card p{ color: var(--ink-soft); font-size: 0.9rem; }
+  .beauty-contact{
+    margin: 0.6rem 0 0 0;
+    font-size: 0.85rem !important;
+  }
+  .beauty-contact + .beauty-contact{ margin-top: 0.2rem; }
+  .beauty-contact a{
+    color: var(--brick);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .beauty-contact a:hover{ text-decoration: underline; }
+
+  /* ---------- TAXI ---------- */
+  .taxi-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px,1fr));
+    gap: 0.9rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .taxi-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 0.6rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0.7rem 1rem;
+  }
+  .taxi-name{
+    font-family:'Fraunces',serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+  .taxi-wa{
+    display:flex;
+    align-items:center;
+    gap: 0.4rem;
+    text-decoration:none;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+  .taxi-wa:hover{ color: var(--dark-red); }
+  .taxi-wa svg{ width: 20px; height: 20px; flex-shrink: 0; }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;
+    padding: 3.5rem 0 3rem 0;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+  }
+  footer .hashtag{
+    font-family:'Caveat', cursive;
+    font-size: 1.6rem;
+    color: var(--brick);
+    display:block;
+    margin-bottom: 0.6rem;
+  }
+
+  .leaf-rule{
+    display:flex;
+    align-items:center;
+    gap: 0.8rem;
+    color: var(--gold);
+    justify-content:center;
+    margin: 0 auto 2.5rem auto;
+    max-width: 200px;
+  }
+  .leaf-rule::before, .leaf-rule::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background: var(--line);
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-mono" id="nav-mono">M &amp; D</div>
+    <div class="nav-right">
+      <div class="lang-switch" id="langSwitch">
+        <button type="button" class="lang-btn active" data-lang="en" aria-label="English">🇺🇸</button>
+        <button type="button" class="lang-btn" data-lang="pt" aria-label="Português">🇧🇷</button>
+        <button type="button" class="lang-btn" data-lang="ru" aria-label="Русский">🇷🇺</button>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home"><span id="navHome">Home</span></a></li>
+        <li><a href="#schedule"><span id="navSchedule">Schedule</span></a></li>
+        <li><a href="#dresscode"><span id="navDresscode">Dress Code</span></a></li>
+        <li><a href="#stay"><span id="navStay">Stay</span></a></li>
+        <li><a href="#travel"><span id="navTravel">Travel &amp; FAQ</span></a></li>
+        <li><a href="#beauty"><span id="navBeauty">Beauty</span></a></li>
+        <li><a href="#taxi"><span id="navTaxi">Taxi</span></a></li>
+        <li><a href="#padrinhos"><span id="navPadrinhos">Padrinhos</span></a></li>
+        <li><a href="#registry"><span id="navRegistry">Registry</span></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section id="home" class="hero">
+  <div class="hero-video" aria-hidden="true">
+    <!-- VIDEO PLACEHOLDER: drop your clip in and uncomment the line below.
+         Keep it short (8-15s), silent, and compressed (an under-10MB mp4
+         is plenty for a looping background) so the page still loads fast.
+         Until a source is added, the gradient behind it shows instead. -->
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="wedding_website_header_video.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="wrap">
+    <h1 class="hero-names"><span id="p1">Anna</span><span class="hero-amp">&amp;</span><span id="p2">Alex</span></h1>
+    <p class="hero-tagline" id="heroTagline">We're tying the knot.<br>Jungle-chic, a Russian twist, and a wedding to remember!</p>
+    <p class="hero-meta"><span id="heroDate">September 19, 2026</span><span class="dot">•</span><span id="heroVenue">Espaço Galiileu Feiticeira, Ilhabela</span></p>
+
+    <div class="countdown" id="countdown"></div>
+  </div>
+</section>
+
+<!-- ================= WELCOME NOTE ================= -->
+<section class="welcome">
+  <div class="wrap">
+    <span class="script" id="welcomeLabel">A little note before the big day</span>
+    <p id="welcomeBody">We can't quite believe it's almost here. This site has everything you need to plan your travel and lodging, dress for the occasion, and celebrate with us — live music, amazing ocean views, delicious food and drinks, and the best company. Scroll down to get started!</p>
+  </div>
+</section>
+
+<div class="divider"><img src="divider_1.png" alt="" class="divider-img"></div>
+
+<!-- ================= SCHEDULE ================= -->
+<section id="schedule">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" id="scheduleEyebrow">The Day</span>
+      <h2 id="scheduleHeading">How the day unfolds</h2>
+      <p id="scheduleIntro">One long, unhurried celebration — here's the shape of it.</p>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<div class="divider"><img src="divider_2.png" alt="" class="divider-img"></div>
+
+<!-- ================= DRESS CODE ================= -->
+<section id="dresscode">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" id="dresscodeEyebrow">Dress Code</span>
+      <h2 id="dressTitle">Rustic Garden Formal</h2>
+      <p id="dressBody">Think warm, earthy tones and natural fabrics — linen, cotton, suede. We'll be on grass and gravel, so heels sink; wedges or flats travel better.</p>
+    </div>
+    <div class="dressdo">
+      <div class="for-her">
+        <h3 id="forHerLabel">For Her</h3>
+        <!-- IMAGE: place what_to_wear_her.png in the same folder as this HTML file -->
+        <img src="what_to_wear_her.png" alt="Dress code inspiration for her">
+        <span class="options-label" id="optionsLabelHer">Great options</span>
+        <ul id="dressHer"></ul>
+      </div>
+      <div class="for-him">
+        <h3 id="forHimLabel">For Him</h3>
+        <!-- IMAGE: place what_to_wear_him.png in the same folder as this HTML file -->
+        <img src="what_to_wear_him.png" alt="Dress code inspiration for him">
+        <span class="options-label" id="optionsLabelHim">Great options</span>
+        <ul id="dressHim"></ul>
+      </div>
+    </div>
+    <p id="dressNote" class="script" style="text-align:center; max-width:520px; margin:2.2rem auto 0 auto; font-size:1.35rem; color:var(--brick);"></p>
+  </div>
+</section>
+
+<div class="divider"><img src="divider_3.png" alt="" class="divider-img"></div>
+
+<!-- ================= HOTELS / STAY ================= -->
+<section id="stay">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" id="stayEyebrow">Getting There</span>
+      <h2 id="stayHeading">Travel &amp; Accommodations</h2>
+      <p id="stayHeadIntro">How to get from São Paulo to Ilhabela, and where to rest for the weekend.</p>
+    </div>
+
+    <div class="timeline" id="travelTimeline"></div>
+
+    <div class="leaf-rule" style="margin-top:3.5rem;"><span style="padding:0 0.4rem;">✦</span></div>
+
+    <h3 style="text-align:center; font-size:1.5rem; margin-bottom:2rem;" id="whereToStayHeading">Where to Stay</h3>
+
+    <div class="venue-ref">
+      <span class="eyebrow" id="venueLabel">Wedding Venue, for reference</span>
+      <h3 style="margin-bottom:0.3rem;" id="venueRefName">Espaço Galiileu Feiticeira</h3>
+      <p style="color:var(--ink-soft); font-size:0.95rem; margin:0 0 1rem 0;" id="venueRefAddress">R. Doná Maria I, 37 - Feiticeira, Ilhabela - SP, 11630-000</p>
+      <a class="btn" id="venueRefLink" href="https://www.villagaliileu.com.br" target="_blank" rel="noopener">Visit venue website</a>
+    </div>
+
+    <p id="stayIntro" style="max-width:620px; margin:2rem auto; text-align:center; color:var(--ink-soft);"></p>
+
+    <p class="script" id="hotelsSubheading" style="text-align:center; font-size:1.3rem; color:var(--brick); margin:2.5rem 0 1.5rem 0;">Some hotel &amp; pousada options nearby</p>
+    <div class="hotel-grid" id="hotelGrid"></div>
+  </div>
+</section>
+
+<div class="divider"><img src="divider_1.png" alt="" class="divider-img"></div>
+
+<!-- ================= TRAVEL & FAQ ================= -->
+<section id="travel">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" id="travelEyebrow">Good to Know</span>
+      <h2 id="travelHeading">Travel &amp; frequently asked questions</h2>
+      <p id="travelIntro">Getting to the venue, parking, kids, weather — the practical stuff, answered.</p>
+    </div>
+    <div class="registry-grid" id="thingsToDoGrid"></div>
+  </div>
+</section>
+
+<div class="divider"><img src="divider_2.png" alt="" class="divider-img"></div>
+
+<!-- ================= BEAUTY ================= -->
+<section id="beauty">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" id="beautyEyebrow">Getting Ready</span>
+      <h2 id="beautyHeading">Top Beauty Salons for Hair &amp; Makeup</h2>
+      <p id="beautyIntro">A few of the island's best spots for hair and makeup, if you'd like a professional touch for the big day.</p>
+    </div>
+    <div class="registry-grid" id="beautyGrid"></div>
+  </div>
+</section>
+
+<div class="divider"><img src="divider_3.png" alt="" class="divider-img"></div>
+
+<!-- ================= TAXI ================= -->
+<section id="taxi">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" id="taxiEyebrow">A Friendly Reminder</span>
+      <h2 id="taxiHeading">Drink, Dance, Don't Drive</h2>
+      <p id="taxiIntro">There will be excellent cocktails and an open bar all night long — which means driving yourself home is officially not the plan. Save one of these numbers and tap to open WhatsApp.</p>
+    </div>
+    <div class="taxi-grid" id="taxiGrid"></div>
+  </div>
+</section>
+
+<!-- ================= PADRINHOS & MADRINHAS ================= -->
+<section id="padrinhos" class="padrinhos-bg">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" id="padrinhosEyebrow">The Ones Beside Us</span>
+      <h2 id="padrinhosHeading">Meet Our Padrinhos</h2>
+      <p id="padrinhosHeadIntro">We couldn't imagine this day without the people standing beside us.</p>
+    </div>
+
+    <div class="wp-columns">
+      <div class="wp-col">
+        <h3 id="wpLabelHer">🩷 Standing with Anna</h3>
+        <ul class="wp-list" id="wpListHer"></ul>
+      </div>
+      <div class="wp-col">
+        <h3 id="wpLabelHim">🩵 Standing with Alex</h3>
+        <ul class="wp-list" id="wpListHim"></ul>
+      </div>
+    </div>
+
+    <div class="leaf-rule" style="margin-top:1.2rem; margin-bottom:1.2rem;"><span style="padding:0 0.4rem;">✦</span></div>
+
+    <div class="card role-card">
+      <h3 id="yourRoleLabel">Your Role</h3>
+      <ul class="role-list" id="roleList"></ul>
+    </div>
+
+    <div class="attire-block">
+      <h3 id="attireLabel">Attire</h3>
+      <p class="attire-title" id="attireTitle">Social &amp; Jungle Chic.</p>
+      <p id="attireBody">Feel free to elevate your look with richer fabrics, bold accessories or elegant animal-inspired details. Coordinate with your partner, but don't worry about matching perfectly.</p>
+    </div>
+
+    <p class="script closing-note" id="closingNote">Thank you for standing beside us on one of the happiest days of our lives. Having you there means more than words can express. We can't wait to celebrate together.</p>
+  </div>
+</section>
+
+<!-- ================= REGISTRY ================= -->
+<section id="registry">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" id="registryEyebrow">Gifts</span>
+      <h2 id="registryHeading">Our Registry</h2>
+      <p id="registryIntro">Your presence is truly the gift. If you'd still like to give something, here's where.</p>
+    </div>
+    <div class="registry-fun-note">
+      <p class="registry-fun-title" id="registryFunTitle">🚧 Under Construction! 🚧</p>
+      <p id="registryFunBody">We are currently still finalizing our registry items. Right now, we're deciding between a modest superyacht, a lightly used private jet, or a private island in the Mediterranean. Once we make a decision, we'll let you know if we need a little help with the down payment. Check back soon!</p>
+    </div>
+
+    <div class="amazon-note">
+      <p id="amazonText">🎁 Can't wait for us to decide? We get it. In this case head over to our list on Amazon — same love!</p>
+      <a class="btn alt" id="amazonBtn" href="https://www.amazon.com/wedding/guest-view/25M99BIXXUUZZ" target="_blank" rel="noopener">View Our Amazon List</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="divider" style="padding-bottom: 1.2rem;"><img src="divider_1.png" alt="" class="divider-img"></div>
+  <span class="hashtag" id="hashtag">#AnnaAndAlex2026</span>
+  <p><span id="footerWithLove">With love,</span> <span id="footerNames">Anna &amp; Alex</span></p>
+</footer>
+
+<script>
+/* ============================================================
+   SHARED — data that stays the same across every language:
+   names, dates, addresses, links, hotel names, access keys.
+   Edit here for facts; edit the I18N object below for wording.
+   ============================================================ */
+const SHARED = {
+  partner1: "Anna",
+  partner2: "Alex",
+  dateISO: "2026-09-19T16:00:00",
+  venueLine: "Espaço Galiileu Feiticeira, Ilhabela",
+  venueWebsite: "https://www.villagaliileu.com.br",
+  venueAddress: "R. Doná Maria I, 37 - Feiticeira, Ilhabela - SP, 11630-000",
+  hashtag: "#AnnaAndAlex2026",
+  stayCheckin: "2026-09-18",
+  stayCheckout: "2026-09-20",
+  hotels: [
+    { name: "DPNY Beach Hotel & SPA Ilhabela" },
+    { name: "Hotel Boutique Ananas" },
+    { name: "Tahaa Pousada Boutique" },
+    { name: "Solariun Beach Hotel" },
+    { name: "Wyndham Ilhabela Casa di Sirena" },
+    { name: "Hotel Colonial de Ilhabela" },
+    { name: "Pousada Casa da Praia Ilhabela" },
+    { name: "Hotel Reserva Ilhabela" },
+    { name: "Barra do Piuva Porto Hotel" }
+  ],
+  taxiDrivers: [
+    { name: "Rodrigo Mota", phone: "(12) 98187-3069", wa: "5512981873069" },
+    { name: "Adão", phone: "(12) 99196-6390", wa: "5512991966390" },
+    { name: "Anísio", phone: "(12) 98182-4264", wa: "5512981824264" },
+    { name: "Bonfim", phone: "(12) 99142-1219", wa: "5512991421219" },
+    { name: "Borges/Tiago", phone: "(12) 99140-0851", wa: "5512991400851" },
+    { name: "João Call", phone: "(12) 99200-4898", wa: "5512992004898" },
+    { name: "Chacrinha", phone: "(12) 98182-5277", wa: "5512981825277" },
+    { name: "Mary", phone: "(11) 96381-3238", wa: "5511963813238" },
+    { name: "Cidy", phone: "(12) 99787-6778", wa: "5512997876778" },
+    { name: "Cosme", phone: "(12) 99249-9380", wa: "5512992499380" },
+    { name: "Ziel", phone: "(12) 99144-1912", wa: "5512991441912" },
+    { name: "Gustavo", phone: "(12) 99246-6886", wa: "5512992466886" },
+    { name: "Hilton/Lucas", phone: "(12) 99164-6808", wa: "5512991646808" },
+    { name: "Jaime", phone: "(12) 99118-0810", wa: "5512991180810" },
+    { name: "João/Marcos", phone: "(12) 99682-7019", wa: "5512996827019" },
+    { name: "Josias", phone: "(12) 99714-6551", wa: "5512997146551" },
+    { name: "Wesley", phone: "(12) 99211-9929", wa: "5512992119929" },
+    { name: "Neto", phone: "(12) 99153-0331", wa: "5512991530331" },
+    { name: "Nicolas", phone: "(12) 99143-8193", wa: "5512991438193" },
+    { name: "Nicolau", phone: "(12) 98114-2199", wa: "5512981142199" },
+    { name: "Nilton", phone: "(12) 99183-3050", wa: "5512991833050" },
+    { name: "Rogério/Kleber", phone: "(12) 99173-1142", wa: "5512991731142" },
+    { name: "Toninho/Júnior", phone: "(12) 99158-9258", wa: "5512991589258" },
+    { name: "Aneilton", phone: "(12) 99102-7035", wa: "5512991027035" }
+  ]
+};
+const LOCALE_MAP = { en: 'en-US', pt: 'pt-BR', ru: 'ru-RU' };
+
+/* ============================================================
+   I18N — all wording in English, Portuguese and Russian.
+   Add/edit text here; the page re-renders on language switch.
+   ============================================================ */
+const I18N = {
+  en: {
+    title: "Anna & Alex — We're Getting Married",
+    nav: { home:"Home", schedule:"Schedule", dresscode:"Dress Code", stay:"Stay", padrinhos:"Padrinhos", travel:"Things to Do", beauty:"Beauty", taxi:"Taxi", registry:"Registry" },
+    heroTagline: "We're tying the knot.<br>Jungle-chic, a Russian twist, and a wedding to remember!",
+    welcome: { label:"A little note before the big day", body:"We can't quite believe it's almost here. This site has everything you need to plan your travel and lodging, dress for the occasion, and celebrate with us — live music, amazing ocean views, delicious food and drinks, and the best company. Scroll down to get started!" },
+    schedule: {
+      eyebrow:"The Day", heading:"How the day unfolds", intro:"One long, unhurried celebration — here's the shape of it.",
+      items: [
+        { time:"15:30", title:"Guest Arrival", desc:"Welcome to the jungle! Grab a drink, enjoy the tropical scenery, and soak in the impressive ocean view." },
+        { time:"16:00", title:"The Ceremony", desc:"The moment we say \"I do\" — surrounded by the spirit of Amazônia and the sweet harmony of instrumental music." },
+        { time:"17:00", title:"Cocktail & Bossa Nova", desc:"Open bar with cocktails, tropical bites, live Bossa Nova, and wonderful company." },
+        { time:"19:00", title:"Dinner", desc:"A feast celebrating rich Brazilian flavors and our new life together." },
+        { time:"20:00", title:"Live Samba & Party Time", desc:"Time to show off your best samba moves (or learn on the fly)!" },
+        { time:"22:00", title:"After-Hours Dancing", desc:"For the night owls who refuse to let the party end!" }
+      ]
+    },
+    dresscode: {
+      eyebrow:"Dress Code", title:"Social & Jungle Chic", body:"Our wedding calls for elegance with a tropical touch. Below, some inspiration for you to shine with us!",
+      forHerLabel:"For Her", forHimLabel:"For Him", optionsLabel:"Great options",
+      forHer: ["Flowy dresses, long or midi","Light, natural fabrics","Tropical prints, animal prints (such as leopard) or reptile prints (such as snake) are welcome","Elegant, feminine looks with a tropical touch"],
+      forHim: ["Linen suits or blazers","Cotton or linen shirts (no tie needed)","Suit pants","Tropical prints, or animal prints (such as leopard) are welcome","Polished, modern looks with personality"],
+      note: "Those are just suggestions. Feel free to wear what makes you feel good and enjoy every moment with us!"
+    },
+    stay: {
+      eyebrow:"Getting There", heading:"Travel & Accommodations", intro:"How to get from São Paulo to Ilhabela, and where to rest for the weekend.",
+      travelSteps: [
+        { title:"Getting to São Paulo", desc:"Fly into São Paulo — Guarulhos (GRU) is the main international airport, or Congonhas (CGH) for domestic flights. From the airport, rent a car or take a bus to the coast. We strongly recommend renting a car as it makes the whole trip much easier." },
+        { title:"São Paulo → São Sebastião (~2h)", desc:"From São Paulo take the highway Rodovia dos Tamoios (SP-099) toward the coast, then follow signs to São Sebastião. The drive takes about 2 hours depending on traffic. On weekends and holidays expect delays — leave early!" },
+        { title:"Ferry to Ilhabela (~15 min)", desc:"From São Sebastião, take the ferry (balsa) to Ilhabela. Ferries run 24 hours a day, every 30 minutes or so, and the crossing takes about 15 minutes.<br><strong>Highly Recommended:</strong> To avoid sitting in potentially long lines, book a \"Hora Marcada\" (Scheduled Time) ticket in advance online <a href=\"https://horamarcada.dh.sp.gov.br/ViaDigital/HM/Detalhes?id=eGfVCrPSj3gueIx0aTb0gg%3D%3D\" target=\"_blank\" rel=\"noopener\">here</a>. If you don't pre-book, you can pay at the terminal using cash as a backup, but be prepared for potentially long wait times." }
+      ],
+      whereToStayHeading:"Where to Stay", venueLabel:"Wedding Venue, for reference", venueLinkText:"Visit venue website",
+      stayIntro: "Ilhabela has many wonderful pousadas (guesthouses) and hotels near the venue. September is peak season so book as early as possible. We recommend checking <a href=\"https://www.booking.com\" target=\"_blank\" rel=\"noopener\">Booking.com</a> or <a href=\"https://www.airbnb.com\" target=\"_blank\" rel=\"noopener\">Airbnb</a>. You'll find a list of recommended stays near the venue below.",
+      hotelsSubheading:"Some hotel & pousada options nearby", searchBookLabel:"Search & book",
+      hotelDescs: [
+        "A beachfront favorite on Praia do Curral — guests rave about the attentive staff, spa, and pools, plus direct access to a secluded stretch of sand.",
+        "A boutique pick near Ilha das Cabras, loved for its sweeping sea views, warm staff, and a breakfast guests consistently call one of the best on the island.",
+        "A peaceful hillside pousada with an infinity pool and garden views — guests often mention toucans and parrots dropping by at breakfast.",
+        "Apartment-style rooms with full kitchens, praised for stunning sunset and mountain views and a breakfast buffet guests keep raving about.",
+        "A newer, design-forward property near Curral Beach, with an infinity pool overlooking the sea and an easy walk to the beach and restaurants.",
+        "Traditional colonial-style charm steps from Ilha das Cabras beach, with sea-view rooms and a buffet breakfast guests say is well worth the stay.",
+        "A cozy local pousada with a loyal following on Instagram — worth checking their latest photos and availability directly.",
+        "A peaceful, eco-minded pousada right at the entrance to Praia da Feiticeira — just steps from the venue — with a rooftop pool guests love and on-site yoga classes.",
+        "A well-loved hotel with a private beach and full-service spa near Ilha das Cabras, consistently praised by guests for its attentive staff and ocean views."
+      ]
+    },
+    padrinhos: {
+      eyebrow:"The Ones Beside Us", heading:"Meet Our Padrinhos", intro:"We couldn't imagine this day without the people standing beside us.",
+      standingWith:"Standing with",
+      wpHer: ["Evgenia & Daniel", "Irina & Amit"],
+      wpHim: ["Lidia & Tulio", "Danitiele & Wesber"],
+      yourRoleLabel:"Your Role",
+      duties: [
+        { lead:"Be early & camera-ready:", desc:"Arrive by 3:00 PM (60 minutes before the ceremony) so we can squeeze in some quick photos and get you prepped." },
+        { lead:"Work the room:", desc:"Help us give everyone a warm welcome as guests arrive." },
+        { lead:"Make your grand entrance:", desc:"The planner will line you up beforehand, so just walk in as a pair when your names are called!" },
+        { lead:"Bring the good energy:", desc:"Stand near the arch during the vows, soak it all in, and send us all your love." },
+        { lead:"Have the best time:", desc:"We chose you because you hold a special place in our hearts. Celebrate, laugh, dance, and enjoy every moment with us." },
+        { lead:"The #1 rule:", desc:"Celebrate with us all night long (and get ready to dance some samba!)." }
+      ],
+      attireLabel:"Attire",
+      attireTitle:"Social & Jungle Chic.",
+      attireBody:"Feel free to elevate your look with richer fabrics, bold accessories or elegant animal-inspired details. Coordinate with your partner, but don't worry about matching perfectly.",
+      closingNote:"Thank you for standing beside us on one of the happiest days of our lives. Having you there means more than words can express. We can't wait to celebrate together."
+    },
+    travel: {
+      eyebrow:"Explore the Island", heading:"Things to Do in Ilhabela", intro:"A few favorites for whenever you're not celebrating with us.",
+      thingsToDo: [
+        { title:"Praia da Feiticeira", desc:"Right by the venue — a rocky, scenic beach with a local legend about a hidden treasure (it's even where the neighborhood gets its name)." },
+        { title:"Beach-Hopping by Boat", desc:"Hire a schooner or boat tour to reach beaches only accessible by water, like Castelhanos, Praia da Fome, and Bonete." },
+        { title:"Chase Waterfalls", desc:"Ilhabela has over 300 waterfalls. Toca Waterfall, near the ferry terminal, is an easy, well-signposted favorite with a natural slide." },
+        { title:"Hike Pico do Baepi", desc:"The island's highest peak, with a 360° view over the coast. A serious trek (about 4-5 hours round trip) through Atlantic Forest — start early." },
+        { title:"Wander the Historic Vila", desc:"Ilhabela's colonial town center, with the 1806 Igreja Nossa Senhora d'Ajuda church, old cannons, and cozy restaurants." },
+        { title:"Dive or Snorkel", desc:"Explore the marine sanctuary around Ilha das Cabras — clear water, fish, turtles, and a few shipwrecks for the more adventurous." },
+        { title:"Whale Watching", desc:"September is one of the best months to see humpback whales migrating along the São Paulo coast. Many tours have a good chance of spotting whales, dolphins, sea turtles, and seabirds." },
+        { title:"Watch the Sunset", desc:"Ilhabela's west-facing beaches look toward the mainland and the Serra do Mar — grab a spot on the sand or a waterfront restaurant for the evening show." },
+        { title:"Try Brazilian Seafood", desc:"From fresh moqueca to bolinho de peixe, the island's restaurants — especially around the historic Vila — are the place for coastal Brazilian cooking." }
+      ]
+    },
+    beauty: {
+      eyebrow:"Getting Ready", heading:"Top Beauty Salons for Hair & Makeup", intro:"A few of the island's best spots for hair and makeup, if you'd like a professional touch for the big day.",
+      items: [
+        { name:"A Bela da Ilha", desc:"The island's largest and most sophisticated beauty complex, in Perequê — hair, makeup and spa.", phone:"(11) 95487-2787", tel:"+5511954872787", instagram:"abeladailha" },
+        { name:"We Cut - Hair & Makeup", desc:"A full-service salon in Perequê offering hair, makeup, manicure, and waxing, with a loyal following on the island since 2016.", phone:"(12) 99182-9356", tel:"+5512991829356", instagram:"wecuthairandmakeup" },
+        { name:"Ilhabela Beauty", desc:"A local hair and beauty salon on the island — check their Instagram to see recent work before booking.", phone:"(12) 98205-2198", tel:"+5512982052198", instagram:"ilhabelabeauty_" },
+        { name:"Guida's Studio Hair", desc:"A hair and aesthetics studio on the island, offering cuts, color, and beauty treatments.", phone:"(12) 99628-9082", tel:"+5512996289082", instagram:"guidas_salaodebeleza" },
+        { name:"Realce Ilhabela", desc:"A hair salon and cosmetics shop on the island, for cuts, color, and beauty essentials.", phone:"(12) 98107-3379", tel:"+5512981073379", instagram:"realceilhabela" },
+        { name:"Sal Rosa Ilhabela", desc:"A cozy, dedicated bridal beauty studio in Perequê, run by makeup artist and hairstylist Roberta, with over 20 years of experience.", phone:"(11) 98305-2525", tel:"+5511983052525", instagram:"salrosa.ilhabela" }
+      ]
+    },
+    taxi: {
+      eyebrow:"A Friendly Reminder", heading:"Drink, Dance, Don't Drive",
+      intro:"There will be excellent cocktails and an open bar all night long — which means driving yourself home is officially not the plan. Save one of these numbers and tap to open WhatsApp."
+    },
+    registry: {
+      eyebrow:"Gifts", heading:"Our Registry", intro:"Your presence is truly the gift. If you'd still like to give something, here's where.",
+      funTitle:"🚧 Under Construction! 🚧",
+      funBody:"We are currently still finalizing our registry items. Right now, we're deciding between a modest superyacht, a lightly used private jet, or a private island in the Mediterranean. Once we make a decision, we'll let you know if we need a little help with the down payment. Check back soon!",
+      amazonText:"🎁 Can't wait for us to decide?<br>We get it. In this case head over to our list on Amazon — same love!",
+      amazonBtnLabel:"View Our Amazon List"
+    },
+    footer: { withLove:"With love," },
+    countdown: { days:"Days", hours:"Hours" }
+  },
+
+  pt: {
+    title: "Anna & Alex — Vamos Nos Casar",
+    nav: { home:"Início", schedule:"Cronograma", dresscode:"Traje", stay:"Hospedagem", padrinhos:"Padrinhos", travel:"O Que Fazer", beauty:"Beleza", taxi:"Táxi", registry:"Presentes" },
+    heroTagline: "Vamos nos casar.<br>Jungle-chic, um toque russo, e um casamento para lembrar!",
+    welcome: { label:"Um recado carinhoso antes do grande dia", body:"Mal podemos acreditar que o dia está quase chegando. Este site tem tudo o que você precisa para planejar sua viagem e hospedagem, se vestir para a ocasião e celebrar com a gente — música ao vivo, vistas incríveis para o mar, comidas e bebidas deliciosas, e a melhor companhia. Navegue pelas seções abaixo para saber mais!" },
+    schedule: {
+      eyebrow:"O Dia", heading:"Como o dia vai se desenrolar", intro:"Um dia para celebrar sem pressa e aproveitar ao máximo.",
+      items: [
+        { time:"15:30", title:"Chegada dos Convidados", desc:"Bem-vindos à selva! Peguem uma bebida, aproveitem o cenário tropical e a vista incrível para o mar." },
+        { time:"16:00", title:"A Cerimônia", desc:"O momento em que dizemos \"sim\" — cercados pelo espírito da Amazônia e pela doce harmonia da música instrumental." },
+        { time:"17:00", title:"Coquetel e Bossa Nova", desc:"Open bar com coquetéis, petiscos tropicais, Bossa Nova ao vivo e ótima companhia." },
+        { time:"19:00", title:"Jantar", desc:"Um banquete celebrando os ricos sabores brasileiros e nossa nova vida juntos." },
+        { time:"20:00", title:"Samba ao Vivo e Festa", desc:"Hora de mostrar seus melhores passos de samba (ou aprender na hora)!" },
+        { time:"22:00", title:"Balada Até Tarde", desc:"Para os fortes que se recusam a deixar a festa acabar!" }
+      ]
+    },
+    dresscode: {
+      eyebrow:"Traje", title:"Social & Jungle Chic", body:"Nosso casamento pede elegância com um toque tropical. Abaixo, algumas inspirações para você brilhar com a gente!",
+      forHerLabel:"Para Elas", forHimLabel:"Para Eles", optionsLabel:"Ótimas opções",
+      forHer: ["Vestidos fluidos, longos ou midi","Tecidos leves e naturais","Estampas tropicais, animal print (como onça) ou reptile print (como cobra) são bem-vindos","Looks elegantes e femininos com um toque tropical"],
+      forHim: ["Ternos ou blazers de linho","Camisas de algodão ou linho (sem gravata)","Calça social","Estampas tropicais ou animal print (como onça) são bem-vindas","Looks modernos e elegantes, com personalidade"],
+      note: "São só sugestões. Fiquem à vontade para usar o que fizer vocês se sentirem bem e aproveitem cada momento com a gente!"
+    },
+    stay: {
+      eyebrow:"Como Chegar", heading:"Viagem e Hospedagem", intro:"Como ir de São Paulo até Ilhabela, e onde descansar no fim de semana.",
+      travelSteps: [
+        { title:"Chegando a São Paulo", desc:"Voe até São Paulo — Guarulhos (GRU) é o principal aeroporto internacional, ou Congonhas (CGH) para voos domésticos. Do aeroporto, alugue um carro ou pegue um ônibus até o litoral. Recomendamos fortemente alugar um carro, pois facilita muito a viagem." },
+        { title:"São Paulo → São Sebastião (~2h)", desc:"De São Paulo, pegue a Rodovia dos Tamoios (SP-099) em direção ao litoral e siga as placas para São Sebastião. O trajeto leva cerca de 2 horas, dependendo do trânsito. Em fins de semana e feriados, espere atrasos — saia cedo!" },
+        { title:"Balsa para Ilhabela (~15 min)", desc:"De São Sebastião, pegue a balsa para Ilhabela. As balsas funcionam 24 horas por dia, a cada 30 minutos aproximadamente, e a travessia leva cerca de 15 minutos.<br><strong>Altamente recomendado:</strong> Para evitar filas potencialmente longas, reserve um ticket de \"Hora Marcada\" com antecedência, online <a href=\"https://horamarcada.dh.sp.gov.br/ViaDigital/HM/Detalhes?id=eGfVCrPSj3gueIx0aTb0gg%3D%3D\" target=\"_blank\" rel=\"noopener\">aqui</a>. Se não reservar com antecedência, você pode pagar no terminal usando dinheiro como alternativa, mas esteja preparado para possíveis longas esperas." }
+      ],
+      whereToStayHeading:"Onde se Hospedar", venueLabel:"Local do Casamento, para referência", venueLinkText:"Visitar site do local",
+      stayIntro: "Ilhabela tem muitas pousadas e hotéis maravilhosos perto do local. Setembro é alta temporada, então reservem o quanto antes. Recomendamos consultar o <a href=\"https://www.booking.com\" target=\"_blank\" rel=\"noopener\">Booking.com</a> ou o <a href=\"https://www.airbnb.com\" target=\"_blank\" rel=\"noopener\">Airbnb</a>. Aqui vai uma lista de hospedagens recomendadas perto do local.",
+      hotelsSubheading:"Algumas opções de hotéis e pousadas na região", searchBookLabel:"Buscar e reservar",
+      hotelDescs: [
+        "Um favorito à beira-mar na Praia do Curral — hóspedes elogiam a equipe atenciosa, o spa e as piscinas, além do acesso direto a um trecho reservado de areia.",
+        "Um boutique querido perto da Ilha das Cabras, admirado pela vista para o mar, equipe calorosa e um café da manhã que os hóspedes chamam de um dos melhores da ilha.",
+        "Uma pousada tranquila na encosta, com piscina de borda infinita e vista para o jardim — hóspedes costumam mencionar araras e tucanos passando na hora do café da manhã.",
+        "Apartamentos completos com cozinha, elogiados pela vista deslumbrante do pôr do sol e das montanhas, e um café da manhã que os hóspedes adoram.",
+        "Uma propriedade mais nova e moderna perto da Praia do Curral, com piscina de borda infinita voltada para o mar e fácil acesso a pé à praia e aos restaurantes.",
+        "Charme colonial tradicional a poucos passos da praia da Ilha das Cabras, com quartos com vista para o mar e um café da manhã que os hóspedes dizem valer a estadia.",
+        "Uma pousada local aconchegante, com bons seguidores no Instagram — vale a pena conferir as fotos recentes e a disponibilidade diretamente.",
+        "Uma pousada tranquila e sustentável bem na entrada da Praia da Feiticeira — bem pertinho do local do casamento — com uma piscina no terraço muito querida pelos hóspedes e aulas de yoga no local.",
+        "Um hotel muito bem avaliado, com praia privativa e spa completo perto da Ilha das Cabras, sempre elogiado pelos hóspedes pela equipe atenciosa e pela vista para o mar."
+      ]
+    },
+    padrinhos: {
+      eyebrow:"Nossos parceiros queridos", heading:"Conheça Nossos Padrinhos e Madrinhas", intro:"Não conseguimos imaginar este dia sem as pessoas que estarão ao nosso lado.",
+      standingWith:"Ao lado de",
+      wpHer: ["Evgenia & Daniel", "Irina & Amit"],
+      wpHim: ["Lidia & Tulio", "Danitiele & Wesber"],
+      yourRoleLabel:"Seu Papel",
+      duties: [
+        { lead:"Chegue cedo, prontos pras fotos:", desc:"Cheguem às 15h (60 minutos antes da cerimônia) para conseguirmos tirar algumas fotos rápidas e deixar tudo pronto." },
+        { lead:"Ajudem a receber todo mundo:", desc:"Nos ajudem a dar as boas-vindas com carinho aos convidados que forem chegando." },
+        { lead:"Façam a entrada triunfal:", desc:"A cerimonialista vai organizar todo mundo antes, então é só entrar em dupla quando seus nomes forem chamados!" },
+        { lead:"Tragam a boa energia:", desc:"Fiquem perto do arco durante os votos, aproveitem o momento e mandem todo o carinho de vocês pra gente." },
+        { lead:"Se divirtam muito:", desc:"A gente escolheu vocês porque vocês têm um lugar especial no nosso coração. Celebrem, riam, dancem e aproveitem cada momento com a gente." },
+        { lead:"A regra número 1:", desc:"Celebrem com a gente a noite toda (e se preparem pra dançar um samba!)." }
+      ],
+      attireLabel:"Traje",
+      attireTitle:"Social & Jungle Chic.",
+      attireBody:"Fiquem à vontade para elevar o look com tecidos mais ricos, acessórios marcantes ou detalhes elegantes inspirados na fauna. Combinem com o parceiro, mas sem se preocupar em ficar idêntico.",
+      closingNote:"Obrigado por estarem ao nosso lado em um dos dias mais felizes da nossa vida. Ter vocês lá significa mais do que as palavras conseguem expressar. Mal podemos esperar para celebrar juntos."
+    },
+    travel: {
+      eyebrow:"Explore a Ilha", heading:"O Que Fazer em Ilhabela", intro:"Algumas sugestões para quando vocês não estiverem celebrando com a gente.",
+      thingsToDo: [
+        { title:"Praia da Feiticeira", desc:"Bem pertinho do local do casamento — uma praia de pedras e paisagem linda, com uma lenda local sobre um tesouro escondido (é de lá, inclusive, que vem o nome do bairro)." },
+        { title:"Passeio de Barco pelas Praias", desc:"Contrate uma escuna ou passeio de barco para chegar a praias só acessíveis pelo mar, como Castelhanos, Praia da Fome e Bonete." },
+        { title:"Cachoeiras", desc:"Ilhabela tem mais de 300 cachoeiras. A Cachoeira da Toca, perto do terminal da balsa, é uma queridinha fácil de acessar, com tobogã natural." },
+        { title:"Subir o Pico do Baepi", desc:"O ponto mais alto da ilha, com vista de 360° para o litoral. Uma trilha exigente (cerca de 4 a 5 horas ida e volta) pela Mata Atlântica — comece cedo." },
+        { title:"Passear pela Vila Histórica", desc:"O centro histórico colonial de Ilhabela, com a Igreja Nossa Senhora d'Ajuda de 1806, canhões antigos e restaurantes charmosos." },
+        { title:"Mergulhar ou Fazer Snorkel", desc:"Explore o santuário marinho ao redor da Ilha das Cabras — água clara, peixes, tartarugas e alguns naufrágios para os mais aventureiros." },
+        { title:"Observação de Baleias", desc:"Setembro é um dos melhores meses para ver baleias-jubarte migrando pelo litoral de São Paulo. Muitos passeios têm boas chances de avistar baleias, golfinhos, tartarugas marinhas e aves marinhas." },
+        { title:"Ver o Pôr do Sol", desc:"As praias voltadas para o oeste em Ilhabela olham para o continente e a Serra do Mar — encontre um lugar na areia ou em um restaurante à beira-mar para o espetáculo do fim de tarde." },
+        { title:"Provar Frutos do Mar Brasileiros", desc:"De moqueca fresca a bolinho de peixe, os restaurantes da ilha — principalmente perto da Vila histórica — são o lugar certo para a culinária litorânea brasileira." }
+      ]
+    },
+    beauty: {
+      eyebrow:"Preparativos", heading:"Melhores Salões para Cabelo e Maquiagem", intro:"Alguns dos melhores espaços da ilha para cabelo e maquiagem, caso vocês queiram um toque profissional para o grande dia.",
+      items: [
+        { name:"A Bela da Ilha", desc:"O maior e mais sofisticado complexo de beleza da ilha, no Perequê — cabelo, maquiagem e spa.", phone:"(11) 95487-2787", tel:"+5511954872787", instagram:"abeladailha" },
+        { name:"We Cut - Hair & Makeup", desc:"Salão completo no Perequê, com cabelo, maquiagem, manicure e depilação, com clientes fiéis na ilha desde 2016.", phone:"(12) 99182-9356", tel:"+5512991829356", instagram:"wecuthairandmakeup" },
+        { name:"Ilhabela Beauty", desc:"Salão de cabelo e beleza local na ilha — vale a pena conferir o Instagram para ver trabalhos recentes antes de agendar.", phone:"(12) 98205-2198", tel:"+5512982052198", instagram:"ilhabelabeauty_" },
+        { name:"Guida's Studio Hair", desc:"Estúdio de cabelo e estética na ilha, com cortes, coloração e tratamentos de beleza.", phone:"(12) 99628-9082", tel:"+5512996289082", instagram:"guidas_salaodebeleza" },
+        { name:"Realce Ilhabela", desc:"Salão de cabelo e loja de cosméticos na ilha, para cortes, coloração e itens essenciais de beleza.", phone:"(12) 98107-3379", tel:"+5512981073379", instagram:"realceilhabela" },
+        { name:"Sal Rosa Ilhabela", desc:"Um espaço acolhedor dedicado a noivas no Perequê, comandado pela cabeleireira e maquiadora Roberta, com mais de 20 anos de experiência.", phone:"(11) 98305-2525", tel:"+5511983052525", instagram:"salrosa.ilhabela" }
+      ]
+    },
+    taxi: {
+      eyebrow:"Um Lembrete Amigável", heading:"Bebeu, Dançou, Não Dirigiu",
+      intro:"Vai ter open bar e drinks excelentes durante todo o evento — então recomendamos não dirigir! Veja abaixo várias opções para chamar um táxi na ilha direto pelo WhatsApp."
+    },
+    registry: {
+      eyebrow:"Presentes", heading:"Nossa Lista de Presentes", intro:"A presença de vocês já é o maior presente. Mas se quiserem nos presentear com algo mais, aqui vão algumas sugestões.",
+      funTitle:"🚧 Em Construção! 🚧",
+      funBody:"Ainda estamos finalizando os itens da nossa lista de presentes. No momento, estamos decidindo entre um super iate modesto, um jatinho particular seminovo, ou uma ilha privativa no Mediterrâneo. Assim que decidirmos, avisamos se precisarmos de uma ajudinha para pagar a entrada. Voltem em breve para conferir!",
+      amazonText:"🎁 Não aguentam esperar a gente decidir?<br>A gente entende. Dá uma olhada na nossa lista da Amazon — o carinho é o mesmo!",
+      amazonBtnLabel:"Ver Nossa Lista na Amazon"
+    },
+    footer: { withLove:"Com carinho," },
+    countdown: { days:"Dias", hours:"Horas" }
+  },
+
+  ru: {
+    title: "Anna & Alex — Мы женимся!",
+    nav: { home:"Главная", schedule:"Программа", dresscode:"Дресс-код", stay:"Проживание", padrinhos:"Padrinhos", travel:"Чем заняться", beauty:"Красота", taxi:"Такси", registry:"Подарки" },
+    heroTagline: "Мы женимся.<br>Jungle-chic, русский акцент и свадьба, которую вы не забудете!",
+    welcome: { label:"Небольшая записка перед важным днём", body:"Мы сами с трудом верим, что этот день почти настал. На этом сайте есть всё, что нужно, чтобы спланировать поездку и проживание, подобрать наряд и отпраздновать вместе с нами — живая музыка, потрясающие виды на океан, вкусная еда и напитки и лучшая компания. Пролистайте вниз, чтобы начать!" },
+    schedule: {
+      eyebrow:"День", heading:"Как пройдёт этот день", intro:"Один долгий, неспешный праздник — вот как он устроен.",
+      items: [
+        { time:"15:30", title:"Сбор гостей", desc:"Добро пожаловать в джунгли! Возьмите напиток, насладитесь тропическим пейзажем и потрясающим видом на океан." },
+        { time:"16:00", title:"Церемония", desc:"Момент, когда мы скажем «да» — в окружении духа Амазонии и нежной инструментальной музыки." },
+        { time:"17:00", title:"Коктейли и босса-нова", desc:"Открытый бар с коктейлями, тропические закуски, живая босса-нова и прекрасная компания." },
+        { time:"19:00", title:"Ужин", desc:"Пир в честь богатой бразильской кухни и начала нашей новой совместной жизни." },
+        { time:"20:00", title:"Живая самба и танцы", desc:"Время показать ваши навыки самбы (или научиться прямо на месте)!" },
+        { time:"22:00", title:"Танцы продолжаются", desc:"Для тех, кто не сдается первым!" }
+      ]
+    },
+    dresscode: {
+      eyebrow:"Дресс-код", title:"Social & Jungle Chic", body:"Наша свадьба — это элегантность с тропическим акцентом. Ниже — немного вдохновения, чтобы блистать вместе с нами!",
+      forHerLabel:"Для неё", forHimLabel:"Для него", optionsLabel:"Отличные варианты",
+      forHer: ["Летящие платья, длинные или миди","Лёгкие натуральные ткани","Тропические принты, анималистичные принты (например, леопард) или рептилии (например, змея) приветствуются","Элегантные, женственные образы с тропическим акцентом"],
+      forHim: ["Льняные костюмы или пиджаки","Рубашки из хлопка или льна (галстук не нужен)","Костюмные брюки","Тропические или анималистичные принты (например, леопард) приветствуются","Стильные, современные образы с характером"],
+      note: "Наши рекомендации — лишь источник вдохновения. Самое главное, чтобы вы чувствовали себя комфортно и с удовольствием разделили этот день вместе с нами!"
+    },
+    stay: {
+      eyebrow:"Как добраться", heading:"Дорога и проживание", intro:"Как добраться из Сан-Паулу до Илья-Белы и где остановиться на выходные.",
+      travelSteps: [
+        { title:"Прилёт в Сан-Паулу", desc:"Прилетайте в Сан-Паулу — Гуарульос (GRU) — основной международный аэропорт, либо Конгоньяс (CGH) для внутренних рейсов. Из аэропорта возьмите машину напрокат или доберитесь на автобусе до побережья. Мы настоятельно рекомендуем взять машину напрокат — так вся поездка будет намного проще." },
+        { title:"Сан-Паулу → Сан-Себастьян (~2 ч)", desc:"Из Сан-Паулу поезжайте по трассе Родовия-дус-Тамойос (SP-099) в сторону побережья, затем следуйте указателям на Сан-Себастьян. Дорога занимает около 2 часов в зависимости от трафика. По выходным и праздникам возможны задержки — выезжайте пораньше!" },
+        { title:"Паром на Илья-Белу (~15 мин)", desc:"Из Сан-Себастьяна на Илья-Белу ходит паром (balsa). Паромы курсируют круглосуточно, примерно каждые 30 минут, переправа занимает около 15 минут.<br><strong>Настоятельно рекомендуем:</strong> чтобы не стоять в потенциально длинной очереди, забронируйте билет «Hora Marcada» (билет на конкретное время) заранее онлайн <a href=\"https://horamarcada.dh.sp.gov.br/ViaDigital/HM/Detalhes?id=eGfVCrPSj3gueIx0aTb0gg%3D%3D\" target=\"_blank\" rel=\"noopener\">здесь</a>. Если не забронировать заранее, можно оплатить на месте наличными, но будьте готовы к возможному долгому ожиданию." }
+      ],
+      whereToStayHeading:"Где остановиться", venueLabel:"Место проведения свадьбы, для справки", venueLinkText:"Сайт места проведения",
+      stayIntro: "На Илья-Беле много прекрасных pousadas (гостевых домов) и отелей рядом с местом проведения. Сентябрь — высокий сезон, поэтому бронируйте как можно раньше. Рекомендуем посмотреть <a href=\"https://www.booking.com\" target=\"_blank\" rel=\"noopener\">Booking.com</a> или <a href=\"https://www.airbnb.com\" target=\"_blank\" rel=\"noopener\">Airbnb</a>. Список рекомендованных вариантов проживания рядом с местом проведения — ниже.",
+      hotelsSubheading:"Несколько вариантов отелей и pousadas поблизости", searchBookLabel:"Подробнее",
+      hotelDescs: [
+        "Любимый отель на первой линии пляжа Прая-ду-Курал — гости отмечают внимательный персонал, спа и бассейны, а также прямой выход на уединённый участок пляжа.",
+        "Любимый бутик-отель рядом с островом Илья-дас-Кабрас, покоряет видом на море, тёплым персоналом и завтраком, который гости называют одним из лучших на острове.",
+        "Тихая усадьба на склоне холма с бассейном-инфинити и видом на сад — гости часто упоминают туканов и попугаев, залетающих на завтрак.",
+        "Апартаменты с полноценной кухней, гости в восторге от вида на закат и горы, а также от завтрака-буфета.",
+        "Более новый отель современного дизайна рядом с пляжем Курал, с бассейном-инфинити с видом на море и пешей доступностью до пляжа и ресторанов.",
+        "Традиционное колониальное очарование в двух шагах от пляжа острова Илья-дас-Кабрас, номера с видом на море и завтрак-буфет, который гости называют достойным всей поездки.",
+        "Уютная местная паузада с хорошей репутацией в Instagram — стоит заглянуть в свежие фото и уточнить наличие мест напрямую.",
+        "Спокойная, экологичная паузада прямо у входа на пляж Фейтисейра — в двух шагах от места проведения свадьбы — с бассейном на крыше, который обожают гости, и занятиями йогой на месте.",
+        "Отель с высокими оценками, собственным пляжем и полноценным спа рядом с островом Илья-дас-Кабрас — гости неизменно хвалят внимательный персонал и виды на океан."
+      ]
+    },
+    padrinhos: {
+      eyebrow:"ТЕМ, КТО БУДЕТ РЯДОМ С НАМИ", heading:"Знакомьтесь: наши падриньос", intro:"Мы не представляем этот день без вас. Спасибо, что разделите его вместе с нами.",
+      standingWith:"Рядом с",
+      wpHer: ["Evgenia & Daniel", "Irina & Amit"],
+      wpHim: ["Lidia & Tulio", "Danitiele & Wesber"],
+      yourRoleLabel:"Ваша роль",
+      duties: [
+        { lead:"Приезжайте пораньше, во всеоружии для фото:", desc:"Приезжайте к 15:00 (за 60 минут до церемонии), чтобы мы успели сделать несколько быстрых фото и всё подготовить." },
+        { lead:"Помогайте встречать гостей:", desc:"Помогите нам тепло встретить гостей по мере их прибытия." },
+        { lead:"Эффектный выход:", desc:"Координатор заранее выстроит всех по порядку — просто заходите парой, когда назовут ваши имена!" },
+        { lead:"Дарите хорошую энергию:", desc:"Стойте рядом с аркой во время клятв, проживайте этот момент и посылайте нам свою любовь." },
+        { lead:"Получайте удовольствие:", desc:"Мы выбрали вас падриньос, потому что вы занимаете особое место в наших сердцах. Празднуйте, смейтесь, танцуйте и наслаждайтесь каждым моментом вместе с нами." },
+        { lead:"Правило номер один:", desc:"Празднуйте с нами всю ночь напролёт (и готовьтесь танцевать самбу!)." }
+      ],
+      attireLabel:"Наряд",
+      attireTitle:"Social & Jungle Chic.",
+      attireBody:"Не стесняйтесь дополнить образ более роскошными тканями, яркими аксессуарами или элегантными деталями в animal-принте. Согласуйте образ с партнёром, но не беспокойтесь о том, чтобы выглядеть одинаково.",
+      closingNote:"Спасибо, что решили разделить с нами этот особенный день. Ваше присутствие — один из самых ценных подарков для нас. Мы с нетерпением ждем встречи и праздника вместе с вами."
+    },
+    travel: {
+      eyebrow:"Исследуйте остров", heading:"Чем заняться на Илья-Беле", intro:"Немного интересных мест — на случай свободного времени перед или после праздника.",
+      thingsToDo: [
+        { title:"Пляж Прая-да-Фейтисейра", desc:"Совсем рядом с местом проведения свадьбы — живописный каменистый пляж с местной легендой о спрятанном кладе (именно от него произошло название района)." },
+        { title:"Экскурсия на лодке по пляжам", desc:"Закажите шхуну или лодочный тур, чтобы добраться до пляжей, доступных только с воды — Каштельяньос, Прая-да-Фоме и Бонети." },
+        { title:"Водопады", desc:"На Илья-Беле больше 300 водопадов. Водопад Тока, рядом с паромным терминалом, — любимый у всех вариант: легко добраться, хорошо обозначен, с природной водной горкой." },
+        { title:"Подъём на Пику-ду-Байпи", desc:"Самая высокая точка острова с панорамным видом на побережье. Серьёзный поход (около 4–5 часов туда-обратно) через атлантический лес — начинайте пораньше." },
+        { title:"Прогулка по исторической Вила", desc:"Колониальный исторический центр Илья-Белы с церковью Носа-Сеньора-д'Ажуда 1806 года, старыми пушками и уютными ресторанами." },
+        { title:"Дайвинг и снорклинг", desc:"Исследуйте морской заповедник у острова Илья-дас-Кабрас — прозрачная вода, рыбы, черепахи и несколько затонувших кораблей для самых смелых." },
+        { title:"Наблюдение за китами", desc:"Сентябрь — один из лучших месяцев для наблюдения за миграцией горбатых китов вдоль побережья Сан-Паулу. Во многих турах высок шанс увидеть китов, дельфинов, морских черепах и морских птиц." },
+        { title:"Закат", desc:"Пляжи Илья-Белы, обращённые на запад, смотрят на материк и горы Серра-ду-Мар — займите место на песке или в ресторане у воды, чтобы полюбоваться вечерней красотой." },
+        { title:"Попробовать бразильские морепродукты", desc:"От свежей мокеки до рыбных котлеток бобиньо-де-пейше — рестораны острова, особенно у исторической Вила, отлично готовят прибрежную бразильскую кухню." }
+      ]
+    },
+    beauty: {
+      eyebrow:"Подготовка к торжеству", heading:"Лучшие салоны причёски и макияжа", intro:"Несколько из лучших мест на острове для причёски и макияжа, если захотите профессиональный образ для торжества.",
+      items: [
+        { name:"A Bela da Ilha", desc:"Самый крупный и изысканный салон красоты на острове, в районе Перекуэ — причёски, макияж и спа.", phone:"(11) 95487-2787", tel:"+5511954872787", instagram:"abeladailha" },
+        { name:"We Cut - Hair & Makeup", desc:"Салон полного цикла в Перекуэ: причёски, макияж, маникюр и депиляция — с постоянными клиентами на острове с 2016 года.", phone:"(12) 99182-9356", tel:"+5512991829356", instagram:"wecuthairandmakeup" },
+        { name:"Ilhabela Beauty", desc:"Местный салон причёсок и красоты на острове — загляните в их Instagram, чтобы увидеть недавние работы перед записью.", phone:"(12) 98205-2198", tel:"+5512982052198", instagram:"ilhabelabeauty_" },
+        { name:"Guida's Studio Hair", desc:"Студия причёсок и эстетики на острове: стрижки, окрашивание и косметологические процедуры.", phone:"(12) 99628-9082", tel:"+5512996289082", instagram:"guidas_salaodebeleza" },
+        { name:"Realce Ilhabela", desc:"Салон причёсок и магазин косметики на острове — стрижки, окрашивание и всё необходимое для красоты.", phone:"(12) 98107-3379", tel:"+5512981073379", instagram:"realceilhabela" },
+        { name:"Sal Rosa Ilhabela", desc:"Уютная студия в Перекуэ, специализирующаяся на невестах, во главе с визажистом и стилистом Робертой с более чем 20-летним опытом.", phone:"(11) 98305-2525", tel:"+5511983052525", instagram:"salrosa.ilhabela" }
+      ]
+    },
+    taxi: {
+      eyebrow:"Дружеское напоминание", heading:"Выпил — не садись за руль",
+      intro:"Весь вечер вас ждут отличные коктейли и открытый бар. Если будете за рулем — лучше оставьте машину до завтра. Ниже собраны контакты местных водителей, которым можно написать прямо в WhatsApp."
+    },
+    registry: {
+      eyebrow:"Подарки", heading:"Наш список подарков", intro:"Ваше присутствие — уже настоящий подарок. Но если хотите подарить что-то ещё, вот варианты.",
+      funTitle:"🚧 Идут работы! 🚧",
+      funBody:"Мы всё ещё работаем над списком подарков. Пока что никак не можем решить, что нам нужнее: скромная суперяхта, слегка подержанный джет или уютный островок где-нибудь в Средиземном море. Как только выбор будет сделан, обязательно сообщим, понадобится ли нам помощь с первоначальным взносом.",
+      amazonText:"🎁 Не терпится, пока мы определимся?<br>Загляните в наш список на Amazon — там всё уже готово.",
+      amazonBtnLabel:"Смотреть список на Amazon"
+    },
+    footer: { withLove:"С любовью," },
+    countdown: { days:"Дней", hours:"Часов" }
+  }
+};
+
+let currentLang = 'en';
+
+/* Icons for the Schedule timeline, one per item in order.
+   Simple line-art SVGs, colored via currentColor to match the badge. */
+const SCHEDULE_ICONS = [
+  // Guest Arrival — welcome drink
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9h12l-1.6 10.2a2 2 0 0 1-2 1.8h-4.8a2 2 0 0 1-2-1.8L6 9Z"/><path d="M8 9c0-3 1.5-5 4-5s4 2 4 5"/><line x1="15.5" y1="4" x2="19" y2="2"/></svg>',
+  // The Ceremony — rings
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="14" r="5"/><circle cx="15" cy="14" r="5"/></svg>',
+  // Cocktail & Bossa Nova — martini glass
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-8 9-8-9Z"/><line x1="12" y1="13" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg>',
+  // Dinner — fork & knife
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2v6M9.5 2v6M9.5 8c0 1.5-1 2-2.5 2v10"/><path d="M17 2c-2 2.5-2 6.5 0 9v9"/></svg>',
+  // Live Samba & Party Time — music note
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 18V5l9-2v13"/><circle cx="7.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg>',
+  // After-Hours Dancing — moon & star
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 12.5A7 7 0 1 1 10.2 4a5.5 5.5 0 0 0 6.8 8.5Z"/><path d="M19 4l.7 1.7L21.5 6.4l-1.8.7L19 8.8l-.7-1.7-1.8-.7 1.8-.7Z"/></svg>'
+];
+
+/* Icons for the Travel steps timeline, one per step in order. */
+const TRAVEL_ICONS = [
+  // Getting to São Paulo — airplane
+  '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>',
+  // São Paulo → São Sebastião — sedan car
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16 4 12 6 12 8 8 14 8 16 12 20 12 21 16"/><path d="M3 16h18"/><path d="M11 8v4"/><circle cx="6.8" cy="16.5" r="1.6"/><circle cx="17.2" cy="16.5" r="1.6"/></svg>',
+  // Ferry to Ilhabela — boat
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15h18l-2 4.5a2 2 0 0 1-1.8 1.2H6.8A2 2 0 0 1 5 19.5L3 15Z"/><path d="M8 15V6l6 4-4 2"/><path d="M8 6h1"/></svg>'
+];
+
+/* ============================================================
+   RENDER — builds the whole page from SHARED + I18N[currentLang].
+   ============================================================ */
+function render(lang){
+  currentLang = lang;
+  const t = I18N[lang];
+  document.documentElement.lang = lang;
+  document.title = t.title;
+
+  // Language switcher active state
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+
+  // Names / nav-mono
+  document.getElementById('p1').textContent = SHARED.partner1;
+  document.getElementById('p2').textContent = SHARED.partner2;
+  document.getElementById('nav-mono').textContent = SHARED.partner1[0] + " & " + SHARED.partner2[0];
+
+  // Nav labels
+  document.getElementById('navHome').textContent = t.nav.home;
+  document.getElementById('navSchedule').textContent = t.nav.schedule;
+  document.getElementById('navDresscode').textContent = t.nav.dresscode;
+  document.getElementById('navStay').textContent = t.nav.stay;
+  document.getElementById('navPadrinhos').textContent = t.nav.padrinhos;
+  document.getElementById('navTravel').textContent = t.nav.travel;
+  document.getElementById('navRegistry').textContent = t.nav.registry;
+  document.getElementById('navBeauty').textContent = t.nav.beauty;
+  document.getElementById('navTaxi').textContent = t.nav.taxi;
+
+  // Hero
+  document.getElementById('heroTagline').innerHTML = t.heroTagline;
+  document.getElementById('heroDate').textContent = new Date(SHARED.dateISO).toLocaleDateString(LOCALE_MAP[lang], { year:'numeric', month:'long', day:'numeric' });
+  document.getElementById('heroVenue').textContent = SHARED.venueLine;
+
+  // Welcome
+  document.getElementById('welcomeLabel').textContent = t.welcome.label;
+  document.getElementById('welcomeBody').textContent = t.welcome.body;
+
+  // Schedule
+  document.getElementById('scheduleEyebrow').textContent = t.schedule.eyebrow;
+  document.getElementById('scheduleHeading').textContent = t.schedule.heading;
+  document.getElementById('scheduleIntro').textContent = t.schedule.intro;
+  const timeline = document.getElementById('timeline');
+  timeline.innerHTML = '';
+  t.schedule.items.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 't-item';
+    div.setAttribute('data-n', i+1);
+    const icon = SCHEDULE_ICONS[i] || '';
+    div.innerHTML = `<div class="t-icon">${icon}</div><div class="t-content"><span class="t-time">${item.time}</span><div class="t-title">${item.title}</div><div class="t-desc">${item.desc}</div></div>`;
+    timeline.appendChild(div);
+  });
+
+  // Dress code
+  document.getElementById('dresscodeEyebrow').textContent = t.dresscode.eyebrow;
+  document.getElementById('dressTitle').textContent = t.dresscode.title;
+  document.getElementById('dressBody').textContent = t.dresscode.body;
+  document.getElementById('forHerLabel').textContent = t.dresscode.forHerLabel;
+  document.getElementById('forHimLabel').textContent = t.dresscode.forHimLabel;
+  document.getElementById('optionsLabelHer').textContent = t.dresscode.optionsLabel;
+  document.getElementById('optionsLabelHim').textContent = t.dresscode.optionsLabel;
+  const dressHer = document.getElementById('dressHer'); dressHer.innerHTML = '';
+  t.dresscode.forHer.forEach(x => { const li=document.createElement('li'); li.textContent=x; dressHer.appendChild(li); });
+  const dressHim = document.getElementById('dressHim'); dressHim.innerHTML = '';
+  t.dresscode.forHim.forEach(x => { const li=document.createElement('li'); li.textContent=x; dressHim.appendChild(li); });
+  document.getElementById('dressNote').textContent = t.dresscode.note;
+
+  // Stay / Travel & Accommodations
+  document.getElementById('stayEyebrow').textContent = t.stay.eyebrow;
+  document.getElementById('stayHeading').textContent = t.stay.heading;
+  document.getElementById('stayHeadIntro').textContent = t.stay.intro;
+  const travelTimeline = document.getElementById('travelTimeline');
+  travelTimeline.innerHTML = '';
+  t.stay.travelSteps.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 't-item';
+    div.setAttribute('data-n', i+1);
+    const icon = TRAVEL_ICONS[i] || '';
+    div.innerHTML = `<div class="t-icon">${icon}</div><div class="t-content"><div class="t-title" style="font-family:'Fraunces',serif; font-size:1.1rem;">${item.title}</div><div class="t-desc">${item.desc}</div></div>`;
+    travelTimeline.appendChild(div);
+  });
+  document.getElementById('whereToStayHeading').textContent = t.stay.whereToStayHeading;
+  document.getElementById('venueLabel').textContent = t.stay.venueLabel;
+  document.getElementById('venueRefName').textContent = SHARED.venueLine.split(',')[0];
+  document.getElementById('venueRefAddress').textContent = SHARED.venueAddress;
+  const venueLink = document.getElementById('venueRefLink');
+  venueLink.href = SHARED.venueWebsite;
+  venueLink.textContent = t.stay.venueLinkText;
+  document.getElementById('stayIntro').innerHTML = t.stay.stayIntro;
+  document.getElementById('hotelsSubheading').textContent = t.stay.hotelsSubheading;
+  const hotelGrid = document.getElementById('hotelGrid');
+  hotelGrid.innerHTML = '';
+  SHARED.hotels.forEach((h, i) => {
+    const div = document.createElement('div');
+    div.className = 'card hotel-card';
+    const q = encodeURIComponent(h.name + ' Ilhabela');
+    const desc = t.stay.hotelDescs[i] || '';
+    div.innerHTML = `<h3>${h.name}</h3><p>${desc}</p><a class="btn alt" href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener">${t.stay.searchBookLabel}</a>`;
+    hotelGrid.appendChild(div);
+  });
+
+  // Padrinhos & Madrinhas / Meet Our Wedding Party
+  document.getElementById('padrinhosEyebrow').textContent = t.padrinhos.eyebrow;
+  document.getElementById('padrinhosHeading').textContent = t.padrinhos.heading;
+  document.getElementById('padrinhosHeadIntro').textContent = t.padrinhos.intro;
+  document.getElementById('wpLabelHer').textContent = `🩷 ${t.padrinhos.standingWith} ${SHARED.partner1}`;
+  document.getElementById('wpLabelHim').textContent = `🩵 ${t.padrinhos.standingWith} ${SHARED.partner2}`;
+  const wpListHer = document.getElementById('wpListHer');
+  wpListHer.innerHTML = '';
+  t.padrinhos.wpHer.forEach(name => { const li = document.createElement('li'); li.textContent = name; wpListHer.appendChild(li); });
+  const wpListHim = document.getElementById('wpListHim');
+  wpListHim.innerHTML = '';
+  t.padrinhos.wpHim.forEach(name => { const li = document.createElement('li'); li.textContent = name; wpListHim.appendChild(li); });
+  document.getElementById('yourRoleLabel').textContent = t.padrinhos.yourRoleLabel;
+  const roleList = document.getElementById('roleList');
+  roleList.innerHTML = '';
+  t.padrinhos.duties.forEach(d => {
+    const li = document.createElement('li');
+    li.innerHTML = `<strong>${d.lead}</strong> ${d.desc}`;
+    roleList.appendChild(li);
+  });
+  document.getElementById('attireLabel').textContent = t.padrinhos.attireLabel;
+  document.getElementById('attireTitle').textContent = t.padrinhos.attireTitle;
+  document.getElementById('attireBody').textContent = t.padrinhos.attireBody;
+  document.getElementById('closingNote').textContent = t.padrinhos.closingNote;
+
+  // Things to Do in Ilhabela
+  document.getElementById('travelEyebrow').textContent = t.travel.eyebrow;
+  document.getElementById('travelHeading').textContent = t.travel.heading;
+  document.getElementById('travelIntro').textContent = t.travel.intro;
+  const thingsToDoGrid = document.getElementById('thingsToDoGrid');
+  thingsToDoGrid.innerHTML = '';
+  t.travel.thingsToDo.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'card registry-card';
+    div.innerHTML = `<h3>${item.title}</h3><p>${item.desc}</p>`;
+    thingsToDoGrid.appendChild(div);
+  });
+
+  // Beauty Salons
+  document.getElementById('beautyEyebrow').textContent = t.beauty.eyebrow;
+  document.getElementById('beautyHeading').textContent = t.beauty.heading;
+  document.getElementById('beautyIntro').textContent = t.beauty.intro;
+  const beautyGrid = document.getElementById('beautyGrid');
+  beautyGrid.innerHTML = '';
+  t.beauty.items.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'card registry-card';
+    div.innerHTML = `<h3>${item.name}</h3><p>${item.desc}</p><p class="beauty-contact"><a href="tel:${item.tel}">${item.phone}</a></p><p class="beauty-contact"><a href="https://www.instagram.com/${item.instagram}/" target="_blank" rel="noopener">@${item.instagram}</a></p>`;
+    beautyGrid.appendChild(div);
+  });
+
+  // Taxi Drivers
+  document.getElementById('taxiEyebrow').textContent = t.taxi.eyebrow;
+  document.getElementById('taxiHeading').textContent = t.taxi.heading;
+  document.getElementById('taxiIntro').textContent = t.taxi.intro;
+  const taxiGrid = document.getElementById('taxiGrid');
+  taxiGrid.innerHTML = '';
+  const WA_ICON = '<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="#25D366" d="M16 3C9 3 3 9 3 16c0 2.6.8 5 2.1 7L3 29l6.2-2c2 .9 4.2 1.4 6.8 1.4 7 0 13-6 13-13S23 3 16 3z"/><path fill="#FFF" d="M22 18.4c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.3-.2.2-.4.3-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.5.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.2 5 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.3.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg>';
+  SHARED.taxiDrivers.forEach(d => {
+    const div = document.createElement('div');
+    div.className = 'taxi-item';
+    div.innerHTML = `<span class="taxi-name">${d.name}</span><a class="taxi-wa" href="https://wa.me/${d.wa}" target="_blank" rel="noopener">${WA_ICON}${d.phone}</a>`;
+    taxiGrid.appendChild(div);
+  });
+
+  // Registry
+  document.getElementById('registryEyebrow').textContent = t.registry.eyebrow;
+  document.getElementById('registryHeading').textContent = t.registry.heading;
+  document.getElementById('registryIntro').textContent = t.registry.intro;
+  document.getElementById('registryFunTitle').textContent = t.registry.funTitle;
+  document.getElementById('registryFunBody').textContent = t.registry.funBody;
+  document.getElementById('amazonText').innerHTML = t.registry.amazonText;
+  document.getElementById('amazonBtn').textContent = t.registry.amazonBtnLabel;
+
+  // Footer
+  document.getElementById('hashtag').textContent = SHARED.hashtag;
+  document.getElementById('footerWithLove').textContent = t.footer.withLove;
+  document.getElementById('footerNames').textContent = SHARED.partner1 + " & " + SHARED.partner2;
+
+  renderCountdown();
+}
+
+// Countdown (labels follow current language)
+function renderCountdown(){
+  const el = document.getElementById('countdown');
+  const target = new Date(SHARED.dateISO).getTime();
+  const now = new Date().getTime();
+  let diff = Math.max(0, target - now);
+  const day = 1000*60*60*24;
+  const days = Math.floor(diff/day);
+  const hours = Math.floor((diff % day)/(1000*60*60));
+  const labels = I18N[currentLang].countdown;
+  el.innerHTML = `
+    <div><div class="num">${days}</div><div class="lbl">${labels.days}</div></div>
+    <div><div class="num">${hours}</div><div class="lbl">${labels.hours}</div></div>
+  `;
+}
+setInterval(renderCountdown, 60000);
+
+// Language switcher
+document.getElementById('langSwitch').addEventListener('click', (e) => {
+  const btn = e.target.closest('.lang-btn');
+  if(!btn) return;
+  render(btn.dataset.lang);
+});
+
+// Initial render (defaults to English; guests can switch anytime)
+render('en');
+
+// Nav toggle (mobile)
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+</script>
+
+</body>
+</html>
+
