@@ -687,7 +687,7 @@
          Keep it short (8-15s), silent, and compressed (an under-10MB mp4
          is plenty for a looping background) so the page still loads fast.
          Until a source is added, the gradient behind it shows instead. -->
-    <video autoplay muted loop playsinline preload="auto">
+    <video id="heroVideo" autoplay muted loop playsinline preload="auto">
       <source src="wedding_website_header_video.mp4" type="video/mp4">
     </video>
   </div>
@@ -1499,6 +1499,22 @@ document.getElementById('langSwitch').addEventListener('click', (e) => {
 
 // Initial render (defaults to English; guests can switch anytime)
 render('en');
+
+// Resume hero video when returning from another app/tab —
+// mobile browsers commonly pause background video and don't auto-resume it.
+const heroVideo = document.getElementById('heroVideo');
+if (heroVideo) {
+  const resumeVideo = () => {
+    if (heroVideo.paused) {
+      heroVideo.play().catch(() => {});
+    }
+  };
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') resumeVideo();
+  });
+  window.addEventListener('pageshow', resumeVideo);
+  window.addEventListener('focus', resumeVideo);
+}
 
 // Nav toggle (mobile)
 const navToggle = document.getElementById('navToggle');
