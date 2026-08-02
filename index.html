@@ -1523,8 +1523,22 @@ render('en');
 // mobile browsers commonly pause background video and don't auto-resume it.
 const heroVideo = document.getElementById('heroVideo');
 if (heroVideo) {
+  let waitingForGesture = false;
+  const gestureEvents = ['touchstart', 'click', 'scroll'];
+  const onGesture = () => {
+    if (heroVideo.paused) heroVideo.play().catch(() => {});
+    gestureEvents.forEach(evt => document.removeEventListener(evt, onGesture));
+    waitingForGesture = false;
+  };
+  const armGestureFallback = () => {
+    if (waitingForGesture) return;
+    waitingForGesture = true;
+    gestureEvents.forEach(evt => document.addEventListener(evt, onGesture, { passive: true, once: false }));
+  };
+
   const resumeVideo = () => {
     if (!heroVideo.paused) return;
+    heroVideo.muted = true;
     heroVideo.play().catch(() => {});
     // A single immediate attempt isn't always reliable on mobile —
     // right after returning from another app, the browser may not have
@@ -1537,9 +1551,18 @@ if (heroVideo) {
     setTimeout(() => {
       if (heroVideo.paused) {
         heroVideo.load();
+        heroVideo.muted = true;
         heroVideo.play().catch(() => {});
       }
     }, 900);
+    // If it's still paused after every automatic attempt, some browsers
+    // are simply refusing programmatic resume regardless of policy
+    // workarounds — in that case, fall back to resuming on the very
+    // next tap/scroll anywhere on the page, which always works since
+    // it's a genuine user gesture.
+    setTimeout(() => {
+      if (heroVideo.paused) armGestureFallback();
+    }, 1500);
   };
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') resumeVideo();
