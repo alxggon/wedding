@@ -152,6 +152,15 @@
     font-weight:600;
     font-size:1.15rem;
     letter-spacing: 0.03em;
+    display:flex;
+    align-items:center;
+    gap: 0.2rem;
+    color: var(--ink);
+  }
+  .nav-rings{
+    width: 21px;
+    height: 21px;
+    color: var(--gold);
   }
   .nav-right{
     display:flex;
@@ -676,7 +685,11 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <div class="nav-mono" id="nav-mono">M &amp; D</div>
+    <div class="nav-mono">
+      <span id="navMonoA">A</span>
+      <svg class="nav-rings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="13" r="5.5"/><circle cx="15" cy="13" r="5.5"/></svg>
+      <span id="navMonoB">A</span>
+    </div>
     <div class="nav-right">
       <div class="lang-switch" id="langSwitch">
         <button type="button" class="lang-btn active" data-lang="en" aria-label="English">🇺🇸</button>
@@ -1325,7 +1338,8 @@ function render(lang){
   // Names / nav-mono
   document.getElementById('p1').textContent = SHARED.partner1;
   document.getElementById('p2').textContent = SHARED.partner2;
-  document.getElementById('nav-mono').textContent = SHARED.partner1[0] + " & " + SHARED.partner2[0];
+  document.getElementById('navMonoA').textContent = SHARED.partner1[0];
+  document.getElementById('navMonoB').textContent = SHARED.partner2[0];
 
   // Nav labels
   document.getElementById('navHome').textContent = t.nav.home;
