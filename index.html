@@ -507,6 +507,12 @@
     box-shadow: var(--shadow);
     margin-bottom: 1.1rem;
   }
+  /* On mobile the fixed height above crops a lot off the sides of a wide
+     image. Let the image keep its own proportions instead, so nothing
+     gets cropped — it may end up shorter, but the full width shows. */
+  @media (max-width: 760px){
+    .dressdo img{ height: auto; object-fit: contain; }
+  }
   .dressdo .options-label{
     display:block;
     font-size: 0.72rem;
