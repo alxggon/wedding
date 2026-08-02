@@ -181,7 +181,7 @@
   .lang-btn.active{ border-color: var(--brick); border-width: 2px; background: none; }
   .nav-links{
     position: fixed;
-    top: 58px; right: 1.5rem;
+    top: 58px; left: auto;
     width: 210px;
     display:flex;
     flex-direction: column;
@@ -1524,9 +1524,22 @@ render('en');
 const heroVideo = document.getElementById('heroVideo');
 if (heroVideo) {
   const resumeVideo = () => {
-    if (heroVideo.paused) {
-      heroVideo.play().catch(() => {});
-    }
+    if (!heroVideo.paused) return;
+    heroVideo.play().catch(() => {});
+    // A single immediate attempt isn't always reliable on mobile —
+    // right after returning from another app, the browser may not have
+    // finished restoring decode resources yet. Retry a couple of times,
+    // and as a last resort reload the video (iOS sometimes fully
+    // unloads backgrounded video, which play() alone can't recover from).
+    setTimeout(() => {
+      if (heroVideo.paused) heroVideo.play().catch(() => {});
+    }, 300);
+    setTimeout(() => {
+      if (heroVideo.paused) {
+        heroVideo.load();
+        heroVideo.play().catch(() => {});
+      }
+    }, 900);
   };
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') resumeVideo();
@@ -1538,7 +1551,17 @@ if (heroVideo) {
 // Nav toggle (mobile)
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
-navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+function alignNavLinks(){
+  const rightOffset = window.innerWidth - navToggle.getBoundingClientRect().right;
+  navLinks.style.right = rightOffset + 'px';
+}
+navToggle.addEventListener('click', () => {
+  alignNavLinks();
+  navLinks.classList.toggle('open');
+});
+window.addEventListener('resize', () => {
+  if (navLinks.classList.contains('open')) alignNavLinks();
+});
 navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 </script>
 
