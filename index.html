@@ -719,7 +719,7 @@
          Keep it short (8-15s), silent, and compressed (an under-10MB mp4
          is plenty for a looping background) so the page still loads fast.
          Until a source is added, the gradient behind it shows instead. -->
-    <video id="heroVideo" autoplay muted loop playsinline preload="auto">
+    <video id="heroVideo" autoplay muted loop playsinline webkit-playsinline="true" preload="auto">
       <source src="wedding_website_header_video.mp4" type="video/mp4">
     </video>
   </div>
@@ -851,7 +851,7 @@
     <div class="section-head">
       <span class="eyebrow" id="taxiEyebrow">A Friendly Reminder</span>
       <h2 id="taxiHeading">Drink, Dance, Don't Drive</h2>
-      <p id="taxiIntro">There will be excellent cocktails and an open bar all night long — which means driving yourself home is officially not the plan. Save one of these numbers and tap to open WhatsApp.</p>
+      <p id="taxiIntro">There will be great cocktails and an open bar the whole time — so driving isn't a great idea. Here's a list of taxi drivers on the island that you can book directly from WhatsApp.</p>
     </div>
     <div class="taxi-grid" id="taxiGrid"></div>
   </div>
@@ -885,12 +885,12 @@
     </div>
 
     <div class="attire-block">
-      <h3 id="attireLabel">Attire</h3>
-      <p class="attire-title" id="attireTitle">Social &amp; Jungle Chic.</p>
-      <p id="attireBody">Feel free to elevate your look with richer fabrics, bold accessories or elegant animal-inspired details. Coordinate with your partner, but don't worry about matching perfectly.</p>
+      <h3 id="attireLabel">Dress Code for Padrinhos</h3>
+      <p class="attire-title" id="attireTitle">Social &amp; Jungle Chic</p>
+      <p id="attireBody">Women: Feel free to elevate your look with luxurious fabrics, statement accessories, or subtle animal-inspired details.<br>Men: We kindly ask that you wear a suit, but skip the tie and leave the jacket unbuttoned for a more relaxed, tropical vibe.<br>Coordinate with your partner if you'd like, but there's no need to match perfectly.</p>
     </div>
 
-    <p class="script closing-note" id="closingNote">Thank you for standing beside us on one of the happiest days of our lives. Having you there means more than words can express. We can't wait to celebrate together.</p>
+    <p class="script closing-note" id="closingNote">Thank you for standing beside us on one of the happiest days of our lives. We can't wait to celebrate together.</p>
   </div>
 </section>
 
@@ -900,7 +900,7 @@
     <div class="section-head">
       <span class="eyebrow" id="registryEyebrow">Gifts</span>
       <h2 id="registryHeading">Our Registry</h2>
-      <p id="registryIntro">Your presence is truly the gift. If you'd still like to give something, here's where.</p>
+      <p id="registryIntro">Your presence is truly the best gift. But if you'd still like to give something, here are some suggestions:</p>
     </div>
     <div class="registry-fun-note">
       <p class="registry-fun-title" id="registryFunTitle">🚧 Under Construction! 🚧</p>
@@ -1012,7 +1012,7 @@ const I18N = {
         { title:"Ferry to Ilhabela (~15 min)", desc:"From São Sebastião, take the ferry (balsa) to Ilhabela. Ferries run 24 hours a day, every 30 minutes or so, and the crossing takes about 15 minutes.<br><strong>Highly Recommended:</strong> To avoid sitting in potentially long lines, book a \"Hora Marcada\" (Scheduled Time) ticket in advance online <a href=\"https://horamarcada.dh.sp.gov.br/ViaDigital/HM/Detalhes?id=eGfVCrPSj3gueIx0aTb0gg%3D%3D\" target=\"_blank\" rel=\"noopener\">here</a>. If you don't pre-book, you can pay at the terminal using cash as a backup, but be prepared for potentially long wait times." }
       ],
       whereToStayHeading:"Where to Stay", venueLabel:"Wedding Venue, for reference", venueLinkText:"Visit venue website",
-      stayIntro: "Ilhabela has many wonderful pousadas (guesthouses) and hotels near the venue. September is peak season so book as early as possible. We recommend checking <a href=\"https://www.booking.com\" target=\"_blank\" rel=\"noopener\">Booking.com</a> or <a href=\"https://www.airbnb.com\" target=\"_blank\" rel=\"noopener\">Airbnb</a>. You'll find a list of recommended stays near the venue below.",
+      stayIntro: "Ilhabela has many wonderful pousadas (guesthouses) and hotels near the venue. September is peak season so book as early as possible. We recommend checking <a href=\"https://www.booking.com\" target=\"_blank\" rel=\"noopener\">Booking.com</a> or <a href=\"https://www.airbnb.com\" target=\"_blank\" rel=\"noopener\">Airbnb</a>. Here are a few recommendations of places near the venue that we think you'll love:",
       hotelsSubheading:"Some hotel & pousada options nearby", searchBookLabel:"Search & book",
       hotelDescs: [
         "A beachfront favorite on Praia do Curral — guests rave about the attentive staff, spa, and pools, plus direct access to a secluded stretch of sand.",
@@ -1040,10 +1040,10 @@ const I18N = {
         { lead:"Have the best time:", desc:"We chose you because you hold a special place in our hearts. Celebrate, laugh, dance, and enjoy every moment with us." },
         { lead:"The #1 rule:", desc:"Celebrate with us all night long (and get ready to dance some samba!)." }
       ],
-      attireLabel:"Attire",
-      attireTitle:"Social & Jungle Chic.",
-      attireBody:"Feel free to elevate your look with richer fabrics, bold accessories or elegant animal-inspired details. Coordinate with your partner, but don't worry about matching perfectly.",
-      closingNote:"Thank you for standing beside us on one of the happiest days of our lives. Having you there means more than words can express. We can't wait to celebrate together."
+      attireLabel:"Dress Code for Padrinhos",
+      attireTitle:"Social & Jungle Chic",
+      attireBody:"Women: Feel free to elevate your look with luxurious fabrics, statement accessories, or subtle animal-inspired details.<br>Men: We kindly ask that you wear a suit, but skip the tie and leave the jacket unbuttoned for a more relaxed, tropical vibe.<br>Coordinate with your partner if you'd like, but there's no need to match perfectly.",
+      closingNote:"Thank you for standing beside us on one of the happiest days of our lives. We can't wait to celebrate together."
     },
     travel: {
       eyebrow:"Explore the Island", heading:"Things to Do in Ilhabela", intro:"A few favorites for whenever you're not celebrating with us.",
@@ -1072,10 +1072,10 @@ const I18N = {
     },
     taxi: {
       eyebrow:"A Friendly Reminder", heading:"Drink, Dance, Don't Drive",
-      intro:"There will be excellent cocktails and an open bar all night long — which means driving yourself home is officially not the plan. Save one of these numbers and tap to open WhatsApp."
+      intro:"There will be great cocktails and an open bar the whole time — so driving isn't a great idea. Here's a list of taxi drivers on the island that you can book directly from WhatsApp."
     },
     registry: {
-      eyebrow:"Gifts", heading:"Our Registry", intro:"Your presence is truly the gift. If you'd still like to give something, here's where.",
+      eyebrow:"Gifts", heading:"Our Registry", intro:"Your presence is truly the best gift. But if you'd still like to give something, here are some suggestions:",
       funTitle:"🚧 Under Construction! 🚧",
       funBody:"We are currently still finalizing our registry items. Right now, we're deciding between a modest superyacht, a lightly used private jet, or a private island in the Mediterranean. Once we make a decision, we'll let you know if we need a little help with the down payment. Check back soon!",
       amazonText:"🎁 Can't wait for us to decide?<br>We get it. In this case head over to our list on Amazon — same love!",
@@ -1144,10 +1144,10 @@ const I18N = {
         { lead:"Se divirtam muito:", desc:"A gente escolheu vocês porque vocês têm um lugar especial no nosso coração. Celebrem, riam, dancem e aproveitem cada momento com a gente." },
         { lead:"A regra número 1:", desc:"Celebrem com a gente a noite toda (e se preparem pra dançar um samba!)." }
       ],
-      attireLabel:"Traje",
-      attireTitle:"Social & Jungle Chic.",
-      attireBody:"Fiquem à vontade para elevar o look com tecidos mais ricos, acessórios marcantes ou detalhes elegantes inspirados na fauna. Combinem com o parceiro, mas sem se preocupar em ficar idêntico.",
-      closingNote:"Obrigado por estarem ao nosso lado em um dos dias mais felizes da nossa vida. Ter vocês lá significa mais do que as palavras conseguem expressar. Mal podemos esperar para celebrar juntos."
+      attireLabel:"Traje dos Padrinhos",
+      attireTitle:"Social & Jungle Chic",
+      attireBody:"Mulheres: fiquem à vontade para elevar o look com tecidos luxuosos, acessórios statement ou detalhes discretos inspirados na fauna.<br>Homens: pedimos gentilmente que usem terno, mas sem gravata e com o blazer aberto, para um visual mais relaxado e tropical.<br>Combinem com o parceiro se quiserem, mas não precisa ficar idêntico.",
+      closingNote:"Obrigado por estarem ao nosso lado em um dos dias mais felizes da nossa vida. Mal podemos esperar para celebrar juntos."
     },
     travel: {
       eyebrow:"Explore a Ilha", heading:"O Que Fazer em Ilhabela", intro:"Algumas sugestões para quando vocês não estiverem celebrando com a gente.",
@@ -1248,10 +1248,10 @@ const I18N = {
         { lead:"Получайте удовольствие:", desc:"Мы выбрали вас падриньос, потому что вы занимаете особое место в наших сердцах. Празднуйте, смейтесь, танцуйте и наслаждайтесь каждым моментом вместе с нами." },
         { lead:"Правило номер один:", desc:"Празднуйте с нами всю ночь напролёт (и готовьтесь танцевать самбу!)." }
       ],
-      attireLabel:"Наряд",
-      attireTitle:"Social & Jungle Chic.",
-      attireBody:"Не стесняйтесь дополнить образ более роскошными тканями, яркими аксессуарами или элегантными деталями в animal-принте. Согласуйте образ с партнёром, но не беспокойтесь о том, чтобы выглядеть одинаково.",
-      closingNote:"Спасибо, что решили разделить с нами этот особенный день. Ваше присутствие — один из самых ценных подарков для нас. Мы с нетерпением ждем встречи и праздника вместе с вами."
+      attireLabel:"Дресс-код для падриньос",
+      attireTitle:"Social & Jungle Chic",
+      attireBody:"Женщинам: не стесняйтесь дополнить образ роскошными тканями, яркими акцентными аксессуарами или сдержанными деталями в стиле animal-принт.<br>Мужчинам: мы просим надеть костюм, но без галстука и с расстёгнутым пиджаком — для более расслабленного, тропического образа.<br>Согласуйте образ с партнёром, если хотите, но выглядеть абсолютно одинаково не обязательно.",
+      closingNote:"Спасибо, что решили разделить с нами этот особенный день. Мы с нетерпением ждем встречи и праздника вместе с вами."
     },
     travel: {
       eyebrow:"Исследуйте остров", heading:"Чем заняться на Илья-Беле", intro:"Немного интересных мест — на случай свободного времени перед или после праздника.",
@@ -1446,7 +1446,7 @@ function render(lang){
   });
   document.getElementById('attireLabel').textContent = t.padrinhos.attireLabel;
   document.getElementById('attireTitle').textContent = t.padrinhos.attireTitle;
-  document.getElementById('attireBody').textContent = t.padrinhos.attireBody;
+  document.getElementById('attireBody').innerHTML = t.padrinhos.attireBody;
   document.getElementById('closingNote').textContent = t.padrinhos.closingNote;
 
   // Things to Do in Ilhabela
@@ -1537,6 +1537,18 @@ render('en');
 // mobile browsers commonly pause background video and don't auto-resume it.
 const heroVideo = document.getElementById('heroVideo');
 if (heroVideo) {
+  // Reinforce autoplay on initial load — some iOS versions/settings
+  // don't reliably honor the HTML autoplay attribute alone, but do
+  // respect an explicit muted + play() call made as soon as the video
+  // can play.
+  heroVideo.muted = true;
+  const tryInitialPlay = () => { heroVideo.play().catch(() => {}); };
+  if (heroVideo.readyState >= 2) {
+    tryInitialPlay();
+  } else {
+    heroVideo.addEventListener('loadeddata', tryInitialPlay, { once: true });
+  }
+
   // iOS in particular can fully discard the decoded video while the
   // page is backgrounded for a while — at that point a bare play()
   // does nothing at all, even from a direct tap. Reloading the element
