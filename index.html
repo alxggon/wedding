@@ -50,18 +50,12 @@
 
   body{
     margin:0;
-    background: var(--bg) url("website_background.png") center / cover no-repeat fixed;
+    background: var(--bg);
     color: var(--ink);
     font-family: 'Jost', sans-serif;
     font-weight: 400;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
-  }
-  /* Mobile browsers render background-attachment:fixed unreliably (the
-     dynamic address bar resizes the viewport, which can make a fixed
-     background appear stretched/zoomed). Fall back to normal scroll. */
-  @media (max-width: 760px){
-    body{ background-attachment: scroll; }
   }
 
   /* subtle grain overlay */
@@ -75,14 +69,20 @@
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   }
 
-  /* soft cream veil over the background photo, keeps text legible */
+  /* Background photo + cream veil. This layer is position:fixed with
+     inset:0, which always sizes to the viewport — unlike a background
+     set directly on body, which sizes against the full page height and
+     ends up showing only a tiny zoomed-in sliver on long pages/mobile. */
   body::after{
     content:"";
     position: fixed;
     inset:0;
     pointer-events:none;
     z-index: 0;
-    background: rgba(246,241,225,0.65);
+    background-image: linear-gradient(rgba(246,241,225,0.65), rgba(246,241,225,0.65)), url("website_background.png");
+    background-size: cover, cover;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
   }
   .wrap, section, nav, footer, .divider{ position: relative; z-index: 1; }
 
@@ -709,7 +709,7 @@
 <!-- ================= WELCOME NOTE ================= -->
 <section class="welcome">
   <div class="wrap">
-    <span class="script" id="welcomeLabel">&gt;&gt; A little note before the big day</span>
+    <span class="script" id="welcomeLabel">&gt;&gt;&gt; A little note before the big day</span>
     <p id="welcomeBody">We can't quite believe it's almost here. This site has everything you need to plan your travel and lodging, dress for the occasion, and celebrate with us — live music, amazing ocean views, delicious food and drinks, and the best company. Scroll down to get started!</p>
   </div>
 </section>
@@ -959,7 +959,7 @@ const I18N = {
     title: "Anna & Alex — We're Getting Married",
     nav: { home:"Home", schedule:"Schedule", dresscode:"Dress Code", stay:"Stay", padrinhos:"Padrinhos", travel:"Things to Do", beauty:"Beauty", taxi:"Taxi", registry:"Registry" },
     heroTagline: "We're tying the knot.<br>Jungle-chic, a Russian twist, and a wedding to remember!",
-    welcome: { label:">> A little note before the big day", body:"We can't quite believe it's almost here. This site has everything you need to plan your travel and lodging, dress for the occasion, and celebrate with us — live music, amazing ocean views, delicious food and drinks, and the best company. Scroll down to get started!" },
+    welcome: { label:">>> A little note before the big day", body:"We can't quite believe it's almost here. This site has everything you need to plan your travel and lodging, dress for the occasion, and celebrate with us — live music, amazing ocean views, delicious food and drinks, and the best company. Scroll down to get started!" },
     schedule: {
       eyebrow:"The Day", heading:"How the day unfolds", intro:"One long, unhurried celebration — here's the shape of it.",
       items: [
