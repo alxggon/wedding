@@ -1523,25 +1523,24 @@ render('en');
 // mobile browsers commonly pause background video and don't auto-resume it.
 const heroVideo = document.getElementById('heroVideo');
 if (heroVideo) {
+  // iOS in particular can fully discard the decoded video while the
+  // page is backgrounded for a while — at that point a bare play()
+  // does nothing at all, even from a direct tap. Reloading the element
+  // first forces it to re-fetch and re-initialize before playing.
+  const hardResume = () => {
+    heroVideo.muted = true;
+    heroVideo.load();
+    const p = heroVideo.play();
+    if (p && p.catch) p.catch(() => {});
+  };
+
   const resumeVideo = () => {
     if (!heroVideo.paused) return;
-    heroVideo.muted = true;
-    heroVideo.play().catch(() => {});
-    // A single immediate attempt isn't always reliable on mobile —
-    // right after returning from another app, the browser may not have
-    // finished restoring decode resources yet. Retry a couple of times,
-    // and as a last resort reload the video (iOS sometimes fully
-    // unloads backgrounded video, which play() alone can't recover from).
-    setTimeout(() => {
-      if (heroVideo.paused) heroVideo.play().catch(() => {});
-    }, 300);
-    setTimeout(() => {
-      if (heroVideo.paused) {
-        heroVideo.load();
-        heroVideo.muted = true;
-        heroVideo.play().catch(() => {});
-      }
-    }, 900);
+    hardResume();
+    // Retry a couple more times — right after returning from another
+    // app, the browser may not have finished restoring resources yet.
+    setTimeout(() => { if (heroVideo.paused) hardResume(); }, 400);
+    setTimeout(() => { if (heroVideo.paused) hardResume(); }, 1200);
   };
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') resumeVideo();
@@ -1553,12 +1552,12 @@ if (heroVideo) {
   // visibilitychange/pageshow callback, since it isn't a direct user
   // gesture — but it always honors play() called right inside a tap
   // handler. So as a permanent, always-on fallback: tapping anywhere
-  // on the hero (where the video lives) resumes it if it's paused.
+  // on the hero (where the video lives) reloads and resumes it.
   const heroSection = document.querySelector('.hero');
   if (heroSection) {
     ['touchstart', 'click'].forEach(evt => {
       heroSection.addEventListener(evt, () => {
-        if (heroVideo.paused) heroVideo.play().catch(() => {});
+        if (heroVideo.paused) hardResume();
       }, { passive: true });
     });
   }
