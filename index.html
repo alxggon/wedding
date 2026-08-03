@@ -595,8 +595,9 @@
   .amazon-note p{
     color: var(--ink-soft);
     font-size: 0.98rem;
-    margin: 0 0 1.1rem 0;
+    margin: 0 0 0.5rem 0;
   }
+  .amazon-note .btn{ margin-top: 0; }
   .registry-card{ text-align:center; }
   .registry-card h3{ font-size: 1.05rem; }
   .registry-card p{ color: var(--ink-soft); font-size: 0.9rem; }
@@ -909,7 +910,12 @@
 
     <div class="amazon-note">
       <p id="amazonText">🎁 Can't wait for us to decide? We get it. In this case head over to our list on Amazon — same love!</p>
-      <a class="btn alt" id="amazonBtn" href="https://www.amazon.com/wedding/guest-view/25M99BIXXUUZZ" target="_blank" rel="noopener">View Our Amazon List</a>
+      <a class="btn alt" id="amazonBtn" href="https://www.amazon.com/wedding/guest-view/25M99BIXXUUZZ" target="_blank" rel="noopener">Our Amazon List (USA)</a>
+    </div>
+
+    <div class="amazon-note">
+      <p id="amazonTextBR">If you're having technical difficulties with Amazon USA, we also created a list on Amazon Brazil.</p>
+      <a class="btn alt" id="amazonBtnBR" href="https://www.amazon.com.br/hz/wishlist/ls/1M37OGE94ZQB?ref_=wl_share" target="_blank" rel="noopener">Our Amazon List (Brazil)</a>
     </div>
   </div>
 </section>
@@ -1079,7 +1085,9 @@ const I18N = {
       funTitle:"🚧 Under Construction! 🚧",
       funBody:"We are currently still finalizing our registry items. Right now, we're deciding between a modest superyacht, a lightly used private jet, or a private island in the Mediterranean. Once we make a decision, we'll let you know if we need a little help with the down payment. Check back soon!",
       amazonText:"🎁 Can't wait for us to decide?<br>We get it. In this case head over to our list on Amazon — same love!",
-      amazonBtnLabel:"View Our Amazon List"
+      amazonBtnLabel:"Our Amazon List (USA)",
+      amazonTextBR:"If you're having technical difficulties with Amazon USA, we also created a list on Amazon Brazil.",
+      amazonBtnLabelBR:"Our Amazon List (Brazil)"
     },
     footer: { withLove:"With love," },
     countdown: { days:"Days", hours:"Hours" }
@@ -1183,7 +1191,9 @@ const I18N = {
       funTitle:"🚧 Em Construção! 🚧",
       funBody:"Ainda estamos finalizando os itens da nossa lista de presentes. No momento, estamos decidindo entre um super iate modesto, um jatinho particular seminovo, ou uma ilha privativa no Mediterrâneo. Assim que decidirmos, avisamos se precisarmos de uma ajudinha para pagar a entrada. Voltem em breve para conferir!",
       amazonText:"🎁 Não aguentam esperar a gente decidir?<br>A gente entende. Dá uma olhada na nossa lista da Amazon — o carinho é o mesmo!",
-      amazonBtnLabel:"Ver Nossa Lista na Amazon"
+      amazonBtnLabel:"Nossa Lista na Amazon (EUA)",
+      amazonTextBR:"Se estiver tendo dificuldades técnicas com a Amazon EUA, também criamos uma lista na Amazon Brasil.",
+      amazonBtnLabelBR:"Nossa Lista na Amazon (Brasil)"
     },
     footer: { withLove:"Com carinho," },
     countdown: { days:"Dias", hours:"Horas" }
@@ -1287,7 +1297,9 @@ const I18N = {
       funTitle:"🚧 Идут работы! 🚧",
       funBody:"Мы всё ещё работаем над списком подарков. Пока что никак не можем решить, что нам нужнее: скромная суперяхта, слегка подержанный джет или уютный островок где-нибудь в Средиземном море. Как только выбор будет сделан, обязательно сообщим, понадобится ли нам помощь с первоначальным взносом.",
       amazonText:"🎁 Не терпится, пока мы определимся?<br>Загляните в наш список на Amazon — там всё уже готово.",
-      amazonBtnLabel:"Смотреть список на Amazon"
+      amazonBtnLabel:"Наш список на Amazon (США)",
+      amazonTextBR:"Если у вас возникнут технические сложности с Amazon США, мы также создали список на Amazon Бразилия.",
+      amazonBtnLabelBR:"Наш список на Amazon (Бразилия)"
     },
     footer: { withLove:"С любовью," },
     countdown: { days:"Дней", hours:"Часов" }
@@ -1497,6 +1509,8 @@ function render(lang){
   document.getElementById('registryFunBody').textContent = t.registry.funBody;
   document.getElementById('amazonText').innerHTML = t.registry.amazonText;
   document.getElementById('amazonBtn').textContent = t.registry.amazonBtnLabel;
+  document.getElementById('amazonTextBR').textContent = t.registry.amazonTextBR;
+  document.getElementById('amazonBtnBR').textContent = t.registry.amazonBtnLabelBR;
 
   // Footer
   document.getElementById('hashtag').textContent = SHARED.hashtag;
